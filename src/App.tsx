@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { ThemeToggle } from './components/ThemeToggle';
+import { getInitialTheme, applyThemeToDocument, toggleThemeValue, type Theme } from './utils/theme';
+import { toggleProjectExpansion, isProjectExpanded, getProjectDuration } from './utils/project-expand';
 
 // Real Badge Data including AI for Bharat & crisp vector Microsoft Certified Fundamentals
 const BADGES = [
@@ -49,8 +52,10 @@ const SECTIONS = [
 ];
 
 export default function App() {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [headerScrolled, setHeaderScrolled] = useState<boolean>(false);
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
   const [activeModalDiagram, setActiveModalDiagram] = useState<{
     title: string;
     src: string;
@@ -58,6 +63,19 @@ export default function App() {
     tags: string[];
     githubUrl?: string;
   } | null>(null);
+
+  // Synchronize document theme class and localStorage
+  useEffect(() => {
+    applyThemeToDocument(theme);
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => toggleThemeValue(prev));
+  };
+
+  const handleToggleProject = (projectId: string) => {
+    setExpandedProjects((prev) => toggleProjectExpansion(prev, projectId));
+  };
 
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -148,24 +166,24 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#FAF8F0] text-[#111111] min-h-screen antialiased selection:bg-[#EA533D] selection:text-white relative">
+    <div className="theme-bg-root bg-[#FAF8F0] text-[#111111] min-h-screen antialiased selection:bg-[#EA533D] selection:text-white relative transition-colors duration-300">
       {/* Background Vertical Ambient Grid Lines */}
       <div className="fixed inset-0 pointer-events-none z-0 flex justify-between max-w-7xl mx-auto px-6 opacity-35">
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
-        <div className="w-px h-full bg-black/5"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
+        <div className="w-px h-full bg-black/5 grid-line"></div>
       </div>
 
       {/* Navigation Bar */}
       <header
         className={`w-full sticky top-0 z-50 transition-all duration-300 border-b border-black/5 ${
           headerScrolled
-            ? 'bg-[#FAF8F0]/98 backdrop-blur-md shadow-xs'
+            ? 'header-scrolled bg-[#FAF8F0]/98 backdrop-blur-md shadow-xs'
             : 'bg-[#FAF8F0]/90 backdrop-blur-sm'
         }`}
       >
@@ -176,7 +194,7 @@ export default function App() {
               e.preventDefault();
               scrollTo('hero');
             }}
-            className="font-display font-extrabold text-2xl tracking-tight text-[#111111] hover:text-[#EA533D] transition-colors"
+            className="nav-brand-title font-display font-extrabold text-2xl tracking-tight text-[#111111] hover:text-[#EA533D] transition-colors"
           >
             Pokuri Lahari
           </a>
@@ -195,7 +213,7 @@ export default function App() {
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
-                  className={`nav-link py-1 cursor-pointer transition-colors ${
+                  className={`nav-link nav-link-item py-1 cursor-pointer transition-colors ${
                     isActive ? 'active-nav-link text-[#EA533D] font-semibold' : 'hover:text-[#EA533D]'
                   }`}
                 >
@@ -207,6 +225,7 @@ export default function App() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <ThemeToggle theme={theme} onToggle={handleToggleTheme} />
             <button
               onClick={() => {
                 scrollTo('contact');
@@ -235,14 +254,6 @@ export default function App() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="space-y-6"
           >
-            {/* Highlight: AWS Student Builder Group Leader Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border border-amber-500/40 text-[#9A3412] font-semibold text-xs md:text-sm shadow-xs select-none">
-              <span className="w-2 h-2 rounded-full bg-[#EA533D] animate-ping" />
-              <span className="font-bold text-[#EA533D]">AWS Student Builder Group Leader</span>
-              <span className="text-black/30">|</span>
-              <span className="text-[#555555]">KLH University · 2024–2027</span>
-            </div>
-
             {/* Giant Single-Line Name Heading (As shown in user reference image) */}
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.25rem] font-black tracking-tight text-[#111111] leading-none select-none">
               Pokuri Lahari
@@ -294,7 +305,7 @@ export default function App() {
               <button
                 onClick={() => scrollCarousel('left')}
                 aria-label="Previous Badges"
-                className="w-8 h-8 rounded-full border border-black/20 bg-white hover:bg-black hover:text-white transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
+                className="carousel-arrow-btn w-8 h-8 rounded-full border border-black/20 bg-white hover:bg-black hover:text-white transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
                 title="Scroll Left"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -304,7 +315,7 @@ export default function App() {
               <button
                 onClick={() => scrollCarousel('right')}
                 aria-label="Next Badges"
-                className="w-8 h-8 rounded-full border border-black/20 bg-white hover:bg-black hover:text-white transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
+                className="carousel-arrow-btn w-8 h-8 rounded-full border border-black/20 bg-white hover:bg-black hover:text-white transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
                 title="Scroll Right"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,8 +330,8 @@ export default function App() {
             className="relative w-full overflow-hidden marquee-container marquee-mask py-4 -my-4"
           >
             <div className="marquee-track flex gap-5">
-              {/* Loop badges twice for seamless infinite marquee scroll */}
-              {[...BADGES, ...BADGES].map((badge, idx) => (
+              {/* Loop badges 4x for continuous infinite horizontal scroll */}
+              {[...BADGES, ...BADGES, ...BADGES, ...BADGES].map((badge, idx) => (
                 <div
                   key={`${badge.id}-${idx}`}
                   className="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-5 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none group"
@@ -334,10 +345,10 @@ export default function App() {
                     />
                   </div>
                   <div className="mt-2 text-center">
-                    <div className="text-xs font-bold text-[#111111] font-heading">
+                    <div className="text-xs font-bold text-[#111111] font-heading badge-title">
                       {badge.title}
                     </div>
-                    <div className="text-[10px] text-gray-500 font-mono">
+                    <div className="text-[10px] text-gray-500 font-mono badge-subtitle">
                       {badge.subtitle}
                     </div>
                   </div>
@@ -352,7 +363,7 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center max-w-5xl mx-auto"
           >
@@ -361,26 +372,17 @@ export default function App() {
                 About Me
               </h2>
 
-              <p className="text-lg text-[#333333] leading-relaxed font-normal">
-                I'm Pokuri Lahari, pursuing Computer Science and Engineering at KLH University (2024–2028). I'm interested in programming, problem-solving, and exploring how software can turn ideas into useful solutions. Here, I share my projects and learning journey.
+              <p className="text-lg md:text-xl text-[#333333] leading-relaxed font-normal">
+                I'm Pokuri Lahari, pursuing Computer Science and Engineering at KLH University (2024–2028) and serving as an{' '}
+                <span className="underline decoration-[#EA533D] decoration-2 underline-offset-4 font-semibold text-[#111111]">
+                  AWS Student Builder Group Leader (2024–2027)
+                </span>
+                . I'm interested in programming, problem-solving, and exploring how software can turn ideas into useful solutions. Here, I share my projects and learning journey.
               </p>
 
-              {/* Dedicated AWS Student Builder Group Leader Highlight Card */}
-              <div className="p-5 rounded-2xl bg-gradient-to-br from-[#FFF9F2] to-white border-2 border-[#EA533D]/30 shadow-xs relative overflow-hidden">
-                <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#EA533D] text-white flex items-center justify-center flex-shrink-0 font-bold shadow-xs">
-                    ⭐
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="font-heading font-bold text-base md:text-lg text-[#111111]">
-                      AWS Student Builder Group Leader (2024–2027)
-                    </h3>
-                    <p className="text-xs md:text-sm text-[#444444] leading-relaxed">
-                      Leading student cloud initiatives, authoring technical walkthroughs on the official AWS Builder Center, and fostering hands-on serverless, multi-agent AI, and cloud architectures.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <p className="text-base text-[#444444] leading-relaxed font-normal">
+                Leading student cloud initiatives, authoring technical walkthroughs on the official AWS Builder Center, and fostering hands-on serverless, multi-agent AI, and cloud architectures.
+              </p>
             </div>
 
             <div className="md:col-span-5 flex justify-center md:justify-end">
@@ -402,7 +404,7 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
@@ -419,11 +421,11 @@ export default function App() {
             <motion.article
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.55 }}
               className="project-card bg-white rounded-2xl p-7 md:p-8 card-border"
               style={{
-                boxShadow: 'rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(234, 83, 61, 0.12) 0px 6px 20px -4px'
+                boxShadow: 'rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(139, 92, 246, 0.12) 0px 6px 20px -4px'
               }}
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -432,7 +434,7 @@ export default function App() {
                     <h3 className="text-2xl md:text-3xl font-bold text-[#111111] tracking-tight mb-3">
                       <a
                         className="hover:text-[#EA533D] transition-colors inline-flex items-center gap-2 group/link cursor-pointer"
-                        href="https://github.com/PokuriLahari/SAGE"
+                        href="https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
@@ -447,26 +449,26 @@ export default function App() {
                     </p>
                   </div>
 
-                  {/* High contrast tags strictly in Orange, Cream, and Charcoal */}
+                  {/* High contrast tags */}
                   <div className="flex flex-wrap gap-2">
                     <span className="font-mono-tag text-xs font-semibold bg-[#FAF8F0] text-[#111111] border border-black">
                       Academic Workspace
                     </span>
-                    <span className="font-mono-tag text-xs font-semibold bg-[#EA533D]/10 text-[#EA533D] border border-[#EA533D]/40">
+                    <span className="font-mono-tag text-xs font-semibold bg-[#8B5CF6]/15 text-[#6D28D9] border border-[#8B5CF6]/50">
                       Grounded AI
                     </span>
                     <span className="font-mono-tag text-xs font-semibold bg-white text-[#111111] border border-black">
                       PostgreSQL
                     </span>
-                    <span className="font-mono-tag text-xs font-semibold bg-[#EA533D] text-white border border-black">
+                    <span className="font-mono-tag text-xs font-semibold bg-[#7C3AED] text-white border border-black">
                       Full Stack AI
                     </span>
                   </div>
 
-                  {/* Clean Action Buttons: GitHub Button & Full Architecture Inspector */}
+                  {/* Action Buttons: GitHub Button & Full Architecture Inspector */}
                   <div className="pt-2 flex items-center gap-3 flex-wrap">
                     <a
-                      href="https://github.com/PokuriLahari/SAGE"
+                      href="https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-5 py-2.5 rounded-full btn-variant-1 font-semibold text-sm cursor-pointer inline-flex items-center gap-2 shadow-xs"
@@ -483,31 +485,53 @@ export default function App() {
                           title: 'SAGE — System Architecture',
                           src: '/assets/images/sage-architecture-diagram.svg',
                           description:
-                            'High-contrast layered system architecture showing FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
+                            'High-contrast layered system architecture in violet & lavender: FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
                           tags: ['FastAPI Gateway', 'JWT Guard', 'PostgreSQL', 'Context RAG Engine'],
-                          githubUrl: 'https://github.com/PokuriLahari/SAGE'
+                          githubUrl: 'https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE'
                         })
                       }
-                      className="px-4 py-2 rounded-full border border-black/30 hover:border-black text-xs font-semibold text-[#111111] hover:bg-black/5 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-full border border-[#8B5CF6]/50 hover:border-[#8B5CF6] text-xs font-semibold text-[#6D28D9] hover:bg-[#8B5CF6]/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
                     >
-                      <svg className="w-3.5 h-3.5 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
                       Inspect Architecture ↗
                     </button>
+
+                    {/* Show More / Show Less Toggle Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleToggleProject('sage')}
+                      aria-expanded={isProjectExpanded(expandedProjects, 'sage')}
+                      aria-controls="project-details-sage"
+                      className="btn-toggle-expand"
+                    >
+                      <span>{isProjectExpanded(expandedProjects, 'sage') ? 'Show Less' : 'Show More'}</span>
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          isProjectExpanded(expandedProjects, 'sage') ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
-                {/* Right Architecture Diagram (High Contrast Cyber-Retro Frame inspired by TeamForge.AI) */}
-                <div className="md:col-span-6 overflow-hidden rounded-xl border-2 border-black bg-[#0B0F19] shadow-md flex items-center justify-center group relative cursor-pointer"
+                {/* Right Architecture Diagram (Violet / Lavender Cyber-Retro Frame) */}
+                <div
+                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-[#8B5CF6]/50 bg-[#0B0817] shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#A78BFA] transition-all"
                   onClick={() =>
                     setActiveModalDiagram({
                       title: 'SAGE — System Architecture',
                       src: '/assets/images/sage-architecture-diagram.svg',
                       description:
-                        'High-contrast layered system architecture showing FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
+                        'High-contrast layered system architecture in violet & lavender: FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
                       tags: ['FastAPI Gateway', 'JWT Guard', 'PostgreSQL', 'Context RAG Engine'],
-                      githubUrl: 'https://github.com/PokuriLahari/SAGE'
+                      githubUrl: 'https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE'
                     })
                   }
                 >
@@ -516,22 +540,78 @@ export default function App() {
                     className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     src="/assets/images/sage-architecture-diagram.svg"
                   />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#FAF8F0] font-mono border border-[#EA533D]/40 opacity-90 group-hover:opacity-100 flex items-center gap-1">
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#DDD6FE] font-mono border border-[#8B5CF6]/50 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
                     <span>🔍 Click to expand</span>
                   </div>
                 </div>
               </div>
+
+              {/* Expandable Tech Stack & Duration Drawer */}
+              <AnimatePresence>
+                {isProjectExpanded(expandedProjects, 'sage') && (
+                  <motion.div
+                    id="project-details-sage"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="overflow-hidden w-full mt-6 pt-5 border-t border-black/10 dark:border-violet-500/20"
+                  >
+                    <div className="project-details-panel p-5 md:p-6 rounded-xl space-y-4">
+                      {/* Project Duration */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-black/10 dark:border-violet-500/20">
+                        <div className="project-section-title">
+                          <svg className="w-4 h-4 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span>Project Duration</span>
+                        </div>
+                        <div className="project-duration-badge">
+                          {getProjectDuration('sage')}
+                        </div>
+                      </div>
+
+                      {/* Tech Stack List */}
+                      <div>
+                        <div className="project-section-title mb-3">
+                          <svg className="w-4 h-4 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                          </svg>
+                          <span>Tech Stack Breakdown</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            'FastAPI (Python 3.11)',
+                            'PostgreSQL Database',
+                            'SQLAlchemy 2.0 ORM',
+                            'Alembic Migrations',
+                            'Contextual RAG Pipeline',
+                            'Vector Embeddings & Semantic Search',
+                            'JWT Authentication & Bcrypt',
+                            'Pydantic v2 Contracts',
+                            'Docker Containerization'
+                          ].map((tech) => (
+                            <span key={tech} className="tech-stack-pill">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.article>
 
             {/* Project 2: Multi-Agent AI Document System */}
             <motion.article
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.55 }}
               className="project-card bg-white rounded-2xl p-7 md:p-8 card-border"
               style={{
-                boxShadow: 'rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(234, 83, 61, 0.12) 0px 6px 20px -4px'
+                boxShadow: 'rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(139, 92, 246, 0.12) 0px 6px 20px -4px'
               }}
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -555,23 +635,23 @@ export default function App() {
                     </p>
                   </div>
 
-                  {/* Tags strictly in Orange, Cream, and Charcoal */}
+                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     <span className="font-mono-tag text-xs font-semibold bg-[#FAF8F0] text-[#111111] border border-black">
                       FastAPI + Streamlit
                     </span>
-                    <span className="font-mono-tag text-xs font-semibold bg-[#EA533D]/10 text-[#EA533D] border border-[#EA533D]/40">
+                    <span className="font-mono-tag text-xs font-semibold bg-[#8B5CF6]/15 text-[#6D28D9] border border-[#8B5CF6]/50">
                       Multi-Agent AI
                     </span>
                     <span className="font-mono-tag text-xs font-semibold bg-white text-[#111111] border border-black">
                       Vector Store
                     </span>
-                    <span className="font-mono-tag text-xs font-semibold bg-[#EA533D] text-white border border-black">
+                    <span className="font-mono-tag text-xs font-semibold bg-[#7C3AED] text-white border border-black">
                       Autonomous Pipeline
                     </span>
                   </div>
 
-                  {/* Clean Action Buttons: GitHub Button & Full Architecture Inspector */}
+                  {/* Action Buttons: GitHub Button & Full Architecture Inspector */}
                   <div className="pt-2 flex items-center gap-3 flex-wrap">
                     <a
                       href="https://github.com/PokuriLahari/Multi-Agent-AI-Document-System"
@@ -591,29 +671,51 @@ export default function App() {
                           title: 'Multi-Agent AI Document System Architecture',
                           src: '/assets/images/multi-agent-architecture-diagram.svg',
                           description:
-                            'High-contrast autonomous multi-agent pipeline: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
+                            'High-contrast autonomous multi-agent pipeline in violet & lavender: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
                           tags: ['Ingestion Agent', 'Vector Memory Lake', 'Evidence Synthesizer', 'FastAPI'],
                           githubUrl: 'https://github.com/PokuriLahari/Multi-Agent-AI-Document-System'
                         })
                       }
-                      className="px-4 py-2 rounded-full border border-black/30 hover:border-black text-xs font-semibold text-[#111111] hover:bg-black/5 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-full border border-[#8B5CF6]/50 hover:border-[#8B5CF6] text-xs font-semibold text-[#6D28D9] hover:bg-[#8B5CF6]/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
                     >
-                      <svg className="w-3.5 h-3.5 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
                       Inspect Architecture ↗
                     </button>
+
+                    {/* Show More / Show Less Toggle Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleToggleProject('multi-agent')}
+                      aria-expanded={isProjectExpanded(expandedProjects, 'multi-agent')}
+                      aria-controls="project-details-multi-agent"
+                      className="btn-toggle-expand"
+                    >
+                      <span>{isProjectExpanded(expandedProjects, 'multi-agent') ? 'Show Less' : 'Show More'}</span>
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          isProjectExpanded(expandedProjects, 'multi-agent') ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
-                {/* Right Architecture Diagram (High Contrast Cyber-Retro Frame inspired by TeamForge.AI) */}
-                <div className="md:col-span-6 overflow-hidden rounded-xl border-2 border-black bg-[#0A0E1A] shadow-md flex items-center justify-center group relative cursor-pointer"
+                {/* Right Architecture Diagram (Violet / Lavender Cyber-Retro Frame) */}
+                <div
+                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-[#8B5CF6]/50 bg-[#0B0817] shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#A78BFA] transition-all"
                   onClick={() =>
                     setActiveModalDiagram({
                       title: 'Multi-Agent AI Document System Architecture',
                       src: '/assets/images/multi-agent-architecture-diagram.svg',
                       description:
-                        'High-contrast autonomous multi-agent pipeline: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
+                        'High-contrast autonomous multi-agent pipeline in violet & lavender: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
                       tags: ['Ingestion Agent', 'Vector Memory Lake', 'Evidence Synthesizer', 'FastAPI'],
                       githubUrl: 'https://github.com/PokuriLahari/Multi-Agent-AI-Document-System'
                     })
@@ -624,18 +726,73 @@ export default function App() {
                     className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                     src="/assets/images/multi-agent-architecture-diagram.svg"
                   />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#FAF8F0] font-mono border border-[#EA533D]/40 opacity-90 group-hover:opacity-100 flex items-center gap-1">
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#DDD6FE] font-mono border border-[#8B5CF6]/50 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
                     <span>🔍 Click to expand</span>
                   </div>
                 </div>
               </div>
+
+              {/* Expandable Tech Stack & Duration Drawer */}
+              <AnimatePresence>
+                {isProjectExpanded(expandedProjects, 'multi-agent') && (
+                  <motion.div
+                    id="project-details-multi-agent"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="overflow-hidden w-full mt-6 pt-5 border-t border-black/10 dark:border-violet-500/20"
+                  >
+                    <div className="project-details-panel p-5 md:p-6 rounded-xl space-y-4">
+                      {/* Project Duration */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-black/10 dark:border-violet-500/20">
+                        <div className="project-section-title">
+                          <svg className="w-4 h-4 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span>Project Duration</span>
+                        </div>
+                        <div className="project-duration-badge">
+                          {getProjectDuration('multi-agent')}
+                        </div>
+                      </div>
+
+                      {/* Tech Stack List */}
+                      <div>
+                        <div className="project-section-title mb-3">
+                          <svg className="w-4 h-4 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                          </svg>
+                          <span>Tech Stack Breakdown</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            'FastAPI Backend (Async)',
+                            'Streamlit Reactive UI',
+                            'Autonomous Multi-Agent Loop',
+                            'Vector Memory Lake (FAISS / ChromaDB)',
+                            'PyMuPDF & Unstructured PDF Parsing',
+                            'Evidence Synthesizer & Guardrails',
+                            'SQLite Metadata Storage',
+                            'Python AsyncIO Processing'
+                          ].map((tech) => (
+                            <span key={tech} className="tech-stack-pill">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.article>
 
             {/* Project 3: AWS Builder Center Articles */}
             <motion.article
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.55 }}
               className="project-card bg-white rounded-2xl p-7 md:p-8 card-border"
               style={{
@@ -711,13 +868,34 @@ export default function App() {
                       GitHub
                     </a>
                     <a
-                      className="px-4 py-2 rounded-full text-xs font-semibold text-[#111111] hover:text-[#EA533D] transition-colors"
+                      className="px-4 py-2 rounded-full text-xs font-semibold text-[#111111] dark:text-[#DDD6FE] hover:text-[#EA533D] transition-colors"
                       href="https://builder.aws.com?inviteId=2ef74eb5-e90a-4394-89d7-266295bd1372"
                       rel="noopener noreferrer"
                       target="_blank"
                     >
                       Join via Builder Invite ↗
                     </a>
+
+                    {/* Show More / Show Less Toggle Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleToggleProject('aws-builder')}
+                      aria-expanded={isProjectExpanded(expandedProjects, 'aws-builder')}
+                      aria-controls="project-details-aws-builder"
+                      className="btn-toggle-expand"
+                    >
+                      <span>{isProjectExpanded(expandedProjects, 'aws-builder') ? 'Show Less' : 'Show More'}</span>
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          isProjectExpanded(expandedProjects, 'aws-builder') ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
@@ -737,6 +915,61 @@ export default function App() {
                   </a>
                 </div>
               </div>
+
+              {/* Expandable Tech Stack & Duration Drawer */}
+              <AnimatePresence>
+                {isProjectExpanded(expandedProjects, 'aws-builder') && (
+                  <motion.div
+                    id="project-details-aws-builder"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="overflow-hidden w-full mt-6 pt-5 border-t border-black/10 dark:border-violet-500/20"
+                  >
+                    <div className="project-details-panel p-5 md:p-6 rounded-xl space-y-4">
+                      {/* Project Duration */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-black/10 dark:border-violet-500/20">
+                        <div className="project-section-title">
+                          <svg className="w-4 h-4 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span>Project Duration</span>
+                        </div>
+                        <div className="project-duration-badge">
+                          {getProjectDuration('aws-builder')}
+                        </div>
+                      </div>
+
+                      {/* Tech Stack List */}
+                      <div>
+                        <div className="project-section-title mb-3">
+                          <svg className="w-4 h-4 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                          </svg>
+                          <span>Tech Stack Breakdown</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            'AWS Lambda (Serverless Compute)',
+                            'Amazon EventBridge Scheduler',
+                            'Amazon Simple Email Service (SES)',
+                            'AWS IAM Least-Privilege Policies',
+                            'Amazon CloudWatch Logs & Metrics',
+                            'Node.js & Python Serverless Functions',
+                            'Architecture Design Flowcharts',
+                            'AWS Builder Center Community Hub'
+                          ].map((tech) => (
+                            <span key={tech} className="tech-stack-pill">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.article>
           </div>
         </section>
@@ -759,16 +992,16 @@ export default function App() {
           </motion.div>
 
           <div className="max-w-5xl mx-auto space-y-4">
-            {/* 1. AWS Certified Cloud Practitioner - Signature Warm Orange/Coral */}
+            {/* 1. AWS Certified Cloud Practitioner - Red/Coral banner as shown in reference */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.45, delay: 0.05 }}
-              className="cert-banner bg-gradient-to-r from-[#EA533D] to-[#FF6E40] text-white rounded-xl px-7 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm border border-black/10"
+              className="cert-banner bg-[#EA533D] text-white rounded-xl px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm border border-black/10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/20">
+                <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/25">
                   <img src="/assets/badges/badge-aws.png" alt="AWS Cloud Practitioner Badge" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
@@ -776,7 +1009,7 @@ export default function App() {
                     AWS Certified Cloud Practitioner
                   </span>
                   <span className="text-sm md:text-base font-normal text-white/95">
-                    Amazon Web Services · Foundational Cloud Architecture
+                    Amazon Web Services · Cloud fundamentals
                   </span>
                 </div>
               </div>
@@ -795,24 +1028,24 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* 2. Microsoft Azure AI Fundamentals - Signature Warm Orange/Coral */}
+            {/* 2. Microsoft Azure AI Fundamentals - Pure White banner as shown in reference */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.45, delay: 0.1 }}
-              className="cert-banner bg-gradient-to-r from-[#EA533D] to-[#FF6E40] text-white rounded-xl px-7 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm border border-black/10"
+              className="cert-banner cert-banner-light bg-white text-[#111111] rounded-xl px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm border border-black/15 card-border"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/20">
+                <div className="cert-icon-bg w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center flex-shrink-0 border border-black/10">
                   <img src="/assets/badges/badge-microsoft-azure.svg" alt="Microsoft Azure AI Badge" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
-                  <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-white block">
+                  <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-[#111111] block cert-title">
                     Microsoft Azure AI Fundamentals
                   </span>
-                  <span className="text-sm md:text-base font-normal text-white/95">
-                    AI-900 · Artificial Intelligence &amp; Machine Learning Fundamentals
+                  <span className="text-sm md:text-base font-normal text-[#444444] cert-desc">
+                    AI-900 · Artificial intelligence fundamentals
                   </span>
                 </div>
               </div>
@@ -821,7 +1054,7 @@ export default function App() {
                   href="https://learn.microsoft.com/api/credentials/share/en-us/LahariPokuri-1310/202AB5D73FA9A59D?sharingId=2F295B1E1BD603CE"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white text-[#EA533D] hover:bg-[#FAF8F0] transition-all shadow-xs hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-[#EA533D] text-white hover:bg-[#FF5A43] transition-all shadow-xs hover:scale-105 active:scale-95"
                 >
                   <span>Verify Credential</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -831,16 +1064,16 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* 3. Aviatrix Certified Engineer (ACE) - Signature Warm Orange/Coral */}
+            {/* 3. Aviatrix Certified Engineer (ACE) - Red/Coral banner as shown in reference */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.45, delay: 0.15 }}
-              className="cert-banner bg-gradient-to-r from-[#EA533D] to-[#FF6E40] text-white rounded-xl px-7 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm border border-black/10"
+              className="cert-banner bg-[#EA533D] text-white rounded-xl px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm border border-black/10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/20">
+                <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/25">
                   <img src="/assets/badges/badge-aviatrix.png" alt="Aviatrix ACE Associate Badge" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
@@ -848,7 +1081,7 @@ export default function App() {
                     Aviatrix Certified Engineer (ACE)
                   </span>
                   <span className="text-sm md:text-base font-normal text-white/95">
-                    ACE Associate · Multi-Cloud Networking &amp; Security Architecture
+                    ACE Associate · Multi-cloud networking
                   </span>
                 </div>
               </div>
@@ -867,29 +1100,29 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* 4. AI for Bharat Hackathon — Signature Warm Orange/Coral */}
+            {/* 4. AI for Bharat Hackathon — Pure White banner as shown in reference */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.45, delay: 0.2 }}
-              className="cert-banner bg-gradient-to-r from-[#EA533D] to-[#FF6E40] text-white rounded-xl px-7 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm border border-black/10"
+              className="cert-banner cert-banner-light bg-white text-[#111111] rounded-xl px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm border border-black/15 card-border"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/20">
+                <div className="cert-icon-bg w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center flex-shrink-0 border border-black/10">
                   <img src="/assets/badges/badge-ai-for-bharat.png" alt="AI for Bharat Hackathon Badge" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-white">
+                    <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-[#111111] cert-title">
                       AI for Bharat Hackathon — Top Innovator
                     </span>
-                    <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-white text-[#EA533D] shadow-2xs">
+                    <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#EA533D] text-white shadow-2xs">
                       One of 36 Teams
                     </span>
                   </div>
-                  <span className="text-sm md:text-base font-normal text-white/95">
-                    Shortlisted for Prototype Development Phase (Powered by AWS, Hack2Skill &amp; YourStory)
+                  <span className="text-sm md:text-base font-normal text-[#444444] cert-desc">
+                    AWS &amp; Hack2Skill · Top 36 Teams · Prototype Phase
                   </span>
                 </div>
               </div>
@@ -898,7 +1131,7 @@ export default function App() {
                   href="https://certificate.hack2skill.com/verify/2026H2S04AIFB-P01365"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white text-[#EA533D] hover:bg-[#FAF8F0] transition-all shadow-xs hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-[#EA533D] text-white hover:bg-[#FF5A43] transition-all shadow-xs hover:scale-105 active:scale-95"
                 >
                   <span>Verify Certificate</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -911,15 +1144,15 @@ export default function App() {
         </section>
       </main>
 
-      {/* Decorative Scalloped Orange & Cream Tab Dividers */}
-      <div className="w-full border-t border-[#111111] relative select-none" data-purpose="decorative-tab-divider">
-        <div className="max-w-5xl mx-auto flex justify-around px-8">
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#EA533D] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Signature Orange"></div>
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#FAF8F0] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Cream"></div>
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#EA533D] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Signature Orange"></div>
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#FAF8F0] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Cream"></div>
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#EA533D] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Signature Orange"></div>
-          <div className="scalloped-tab w-12 md:w-14 h-8 bg-[#FAF8F0] rounded-b-full -mt-px shadow-xs border-b border-x border-black/20 cursor-pointer" title="Cream"></div>
+      {/* Decorative Scalloped Multi-Color Tab Dividers (Exact Colors from User Reference Image) */}
+      <div className="w-full border-t-2 border-[#111111] scalloped-divider-bar relative select-none" data-purpose="decorative-tab-divider">
+        <div className="max-w-5xl mx-auto flex justify-between sm:justify-around px-4 sm:px-8">
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#FFEE00] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Vibrant Yellow"></div>
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#5B9DF5] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Sky Blue"></div>
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#9880F5] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Lavender Violet"></div>
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#F36D38] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Warm Coral"></div>
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#EA95D7] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Pastel Pink"></div>
+          <div className="scalloped-tab w-12 sm:w-16 h-10 sm:h-12 bg-[#B5DE4C] rounded-b-[24px] -mt-px shadow-xs border-b border-x border-black/30 cursor-pointer" title="Lime Green"></div>
         </div>
       </div>
 
@@ -1078,7 +1311,7 @@ export default function App() {
           </div>
 
           {/* Giant Bottom Brand Wordmark */}
-          <div className="text-center pt-8 border-t border-black/10">
+          <div className="text-center pt-8 border-t border-black/10 footer-divider">
             <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-[#111111] select-none font-display">
               Pokuri Lahari
             </h2>
@@ -1091,7 +1324,7 @@ export default function App() {
 
       {/* FLOATING SCROLL NAVIGATION CONTROLS ([Back Arrow] / [Next Arrow]) */}
       <aside aria-label="Section Navigation" className="fixed bottom-6 right-6 z-40 select-none">
-        <div className="bg-[#111111]/95 text-white backdrop-blur-md px-3.5 py-2 rounded-full shadow-lg border border-white/10 flex items-center gap-2">
+        <div className="floating-nav-panel bg-[#111111]/95 text-white backdrop-blur-md px-3.5 py-2 rounded-full shadow-lg border border-white/10 flex items-center gap-2">
           {/* Back Arrow button */}
           <button
             onClick={() => navigateSection('prev')}
@@ -1145,12 +1378,12 @@ export default function App() {
               exit={{ scale: 0.94, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0B0F19] border-2 border-[#EA533D] text-white rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
+              className="bg-[#0B0817] border-2 border-[#8B5CF6] text-white rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(139,92,246,0.35)]"
             >
               {/* Modal Header */}
-              <div className="px-6 py-4 border-b border-[#EA533D]/30 flex items-center justify-between bg-[#141012]">
+              <div className="px-6 py-4 border-b border-[#8B5CF6]/30 flex items-center justify-between bg-[#120D24]">
                 <div>
-                  <div className="text-xs font-mono text-[#EA533D] font-bold uppercase tracking-wider">
+                  <div className="text-xs font-mono text-[#C4B5FD] font-bold uppercase tracking-wider">
                     High-Contrast Architecture Inspector
                   </div>
                   <h3 className="text-lg md:text-xl font-bold text-white">
@@ -1167,16 +1400,16 @@ export default function App() {
               </div>
 
               {/* Modal Body / Image */}
-              <div className="p-4 md:p-6 overflow-auto flex-1 flex items-center justify-center bg-[#070A11]">
+              <div className="p-4 md:p-6 overflow-auto flex-1 flex items-center justify-center bg-[#070512]">
                 <img
                   src={activeModalDiagram.src}
                   alt={activeModalDiagram.title}
-                  className="w-full h-auto max-h-[65vh] object-contain rounded-lg border border-[#EA533D]/25"
+                  className="w-full h-auto max-h-[65vh] object-contain rounded-lg border border-[#8B5CF6]/30"
                 />
               </div>
 
               {/* Modal Footer */}
-              <div className="px-6 py-4 border-t border-[#EA533D]/30 bg-[#141012] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="px-6 py-4 border-t border-[#8B5CF6]/30 bg-[#120D24] flex flex-col sm:flex-row items-center justify-between gap-3">
                 <p className="text-xs text-gray-300 max-w-2xl leading-relaxed">
                   {activeModalDiagram.description}
                 </p>
@@ -1186,7 +1419,7 @@ export default function App() {
                       href={activeModalDiagram.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-full btn-variant-1 text-xs font-semibold inline-flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#9333EA] hover:from-[#6D28D9] hover:to-[#7E22CE] text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
                     >
                       <span>Repository on GitHub</span>
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

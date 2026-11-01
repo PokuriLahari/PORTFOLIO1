@@ -1,204 +1,243 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%" style="background:#090C12; font-family:'Inter', system-ui, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%" style="background:#080612; font-family:'Inter', system-ui, sans-serif;">
   <defs>
-    <!-- Gradients & Glows (Strictly Orange & Cream / Charcoal) -->
-    <linearGradient id="sage-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0E121B"/>
-      <stop offset="100%" stop-color="#05070B"/>
+    <!-- Deep Dark Obsidian Violet Gradients & Glows -->
+    <linearGradient id="sage-dark-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E0B1C"/>
+      <stop offset="50%" stop-color="#090714"/>
+      <stop offset="100%" stop-color="#05040B"/>
     </linearGradient>
-    <linearGradient id="orange-primary" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#EA533D"/>
-      <stop offset="100%" stop-color="#FF6E40"/>
+
+    <linearGradient id="violet-primary" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
     </linearGradient>
-    <linearGradient id="orange-dark" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#C23B27"/>
-      <stop offset="100%" stop-color="#EA533D"/>
+
+    <linearGradient id="lavender-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#C084FC"/>
     </linearGradient>
-    
-    <filter id="glow-orange" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
+
+    <linearGradient id="box-card-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151028"/>
+      <stop offset="100%" stop-color="#0E0A1E"/>
+    </linearGradient>
+
+    <filter id="glow-violet" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
-  <!-- Background grid pattern in subtle orange -->
-  <rect width="960" height="540" fill="url(#sage-bg)"/>
-  <g opacity="0.08" stroke="#EA533D" stroke-width="0.75">
+  <!-- Background -->
+  <rect width="960" height="540" fill="url(#sage-dark-bg)"/>
+
+  <!-- Subtle Cyber Grid in Violet/Lavender -->
+  <g opacity="0.12" stroke="#8B5CF6" stroke-width="0.75">
     <path d="M 0 60 L 960 60 M 0 120 L 960 120 M 0 180 L 960 180 M 0 240 L 960 240 M 0 300 L 960 300 M 0 360 L 960 360 M 0 420 L 960 420 M 0 480 L 960 480" />
     <path d="M 80 0 L 80 540 M 160 0 L 160 540 M 240 0 L 240 540 M 320 0 L 320 540 M 400 0 L 400 540 M 480 0 L 480 540 M 560 0 L 560 540 M 640 0 L 640 540 M 720 0 L 720 540 M 800 0 L 800 540 M 880 0 L 880 540" />
   </g>
 
-  <!-- Outer Cyber Border -->
-  <rect x="14" y="14" width="932" height="512" rx="10" fill="none" stroke="#EA533D" stroke-width="2" opacity="0.85"/>
-  <rect x="18" y="18" width="924" height="504" rx="8" fill="none" stroke="#251E1C" stroke-width="1.5"/>
+  <!-- Ambient Light Blobs -->
+  <circle cx="200" cy="120" r="140" fill="#7C3AED" opacity="0.08" filter="url(#glow-violet)"/>
+  <circle cx="750" cy="380" r="160" fill="#A855F7" opacity="0.06" filter="url(#glow-violet)"/>
+
+  <!-- Outer Cyber Border in Violet & Lavender -->
+  <rect x="14" y="14" width="932" height="512" rx="12" fill="none" stroke="#8B5CF6" stroke-width="1.8" opacity="0.85"/>
+  <rect x="18" y="18" width="924" height="504" rx="10" fill="none" stroke="#2E1F4D" stroke-width="1.2"/>
 
   <!-- Top Retro Title Bar -->
   <g id="title-bar">
-    <rect x="28" y="26" width="160" height="30" rx="4" fill="#1C1412" stroke="#EA533D" stroke-width="1.5"/>
-    <text x="38" y="46" fill="#EA533D" font-size="13" font-weight="800" font-family="'Fragment Mono', monospace" letter-spacing="1.5">SAGE.ENGINE</text>
+    <rect x="28" y="26" width="160" height="30" rx="6" fill="#181130" stroke="#8B5CF6" stroke-width="1.4"/>
+    <text x="42" y="46" fill="#C4B5FD" font-size="12" font-weight="800" font-family="'Fragment Mono', monospace" letter-spacing="1.5">SAGE.ENGINE</text>
 
-    <!-- Center System Architecture Banner -->
-    <rect x="260" y="24" width="440" height="34" rx="4" fill="#161111" stroke="#EA533D" stroke-width="1.5" filter="url(#glow-orange)"/>
-    <text x="480" y="46" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="2">
+    <!-- Center Architecture Title Banner -->
+    <rect x="250" y="24" width="460" height="34" rx="6" fill="#16102D" stroke="#A78BFA" stroke-width="1.5" filter="url(#soft-glow)"/>
+    <text x="480" y="45" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="2">
       &gt;&gt;&gt; SYSTEM ARCHITECTURE &lt;&lt;&lt;
     </text>
-    <text x="480" y="55" text-anchor="middle" fill="#FAF8F0" font-size="8" font-weight="700" font-family="'Fragment Mono', monospace" letter-spacing="2.5">
+    <text x="480" y="54" text-anchor="middle" fill="#DDD6FE" font-size="7.5" font-weight="700" font-family="'Fragment Mono', monospace" letter-spacing="2.2">
       GROUNDED AI · JWT SECURED · POSTGRESQL PERSISTENCE
     </text>
 
-    <rect x="760" y="26" width="170" height="30" rx="4" fill="#1C1412" stroke="#EA533D" stroke-width="1.5"/>
-    <text x="845" y="46" text-anchor="middle" fill="#EA533D" font-size="12" font-weight="800" font-family="'Fragment Mono', monospace" letter-spacing="1.5">[ PRODUCTION ARCH ]</text>
+    <rect x="750" y="26" width="180" height="30" rx="6" fill="#181130" stroke="#8B5CF6" stroke-width="1.4"/>
+    <text x="840" y="46" text-anchor="middle" fill="#C4B5FD" font-size="11" font-weight="800" font-family="'Fragment Mono', monospace" letter-spacing="1.5">[ PRODUCTION ARCH ]</text>
   </g>
 
-  <!-- LEFT INPUTS LAYER -->
+  <!-- LEFT: INPUTS LAYER -->
   <g id="inputs-layer" transform="translate(32, 80)">
-    <rect x="0" y="0" width="150" height="340" rx="8" fill="#151215" stroke="#EA533D" stroke-width="2"/>
-    <rect x="0" y="0" width="150" height="32" rx="6" fill="#EA533D"/>
-    <text x="75" y="21" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">INPUT DATA</text>
+    <rect x="0" y="0" width="150" height="340" rx="10" fill="#120E24" stroke="#8B5CF6" stroke-width="1.8"/>
+    <rect x="0" y="0" width="150" height="32" rx="8" fill="url(#violet-primary)"/>
+    <text x="75" y="21" text-anchor="middle" fill="#FFFFFF" font-size="11.5" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">INPUT DATA</text>
 
-    <!-- Input Items -->
+    <!-- Input Cards -->
     <g transform="translate(10, 48)">
-      <rect width="130" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1" opacity="0.9"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Student Inquiry</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Natural language</text>
+      <rect width="130" height="48" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1" stroke-opacity="0.6"/>
+      <text x="12" y="21" fill="#FFFFFF" font-size="10.5" font-weight="700">Student Inquiry</text>
+      <text x="12" y="37" fill="#DDD6FE" opacity="0.8" font-size="8.5" font-family="'Fragment Mono', monospace">Natural language</text>
     </g>
     <g transform="translate(10, 108)">
-      <rect width="130" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1" opacity="0.9"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Course Syllabus</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Curriculum docs</text>
+      <rect width="130" height="48" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1" stroke-opacity="0.6"/>
+      <text x="12" y="21" fill="#FFFFFF" font-size="10.5" font-weight="700">Course Syllabus</text>
+      <text x="12" y="37" fill="#DDD6FE" opacity="0.8" font-size="8.5" font-family="'Fragment Mono', monospace">Curriculum docs</text>
     </g>
     <g transform="translate(10, 168)">
-      <rect width="130" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1" opacity="0.9"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Tasks &amp; Deadlines</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Calendar timelines</text>
+      <rect width="130" height="48" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1" stroke-opacity="0.6"/>
+      <text x="12" y="21" fill="#FFFFFF" font-size="10.5" font-weight="700">Tasks &amp; Deadlines</text>
+      <text x="12" y="37" fill="#DDD6FE" opacity="0.8" font-size="8.5" font-family="'Fragment Mono', monospace">Calendar timelines</text>
     </g>
     <g transform="translate(10, 228)">
-      <rect width="130" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1" opacity="0.9"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Academic History</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Progress metrics</text>
+      <rect width="130" height="48" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1" stroke-opacity="0.6"/>
+      <text x="12" y="21" fill="#FFFFFF" font-size="10.5" font-weight="700">Academic History</text>
+      <text x="12" y="37" fill="#DDD6FE" opacity="0.8" font-size="8.5" font-family="'Fragment Mono', monospace">Progress metrics</text>
     </g>
   </g>
 
-  <!-- Flow Arrow from Inputs to Core -->
-  <path d="M 184 250 L 220 250" stroke="#EA533D" stroke-width="3" stroke-dasharray="6,3" fill="none"/>
+  <!-- Flow Connector 1 -->
+  <path d="M 182 250 L 222 250" stroke="#C084FC" stroke-width="2.5" stroke-dasharray="6,4" fill="none"/>
+  <polygon points="224,250 216,245 216,255" fill="#C084FC"/>
 
-  <!-- CENTER CORE SYSTEM (3 Distinct Layers) -->
+  <!-- CENTER CORE SYSTEM (3 Layers) -->
   <g id="core-system" transform="translate(225, 80)">
     <!-- Layer 1: API Gateway & Security -->
-    <rect x="0" y="0" width="490" height="95" rx="8" fill="#141113" stroke="#EA533D" stroke-width="2"/>
-    <rect x="0" y="0" width="490" height="26" rx="6" fill="#EA533D"/>
-    <text x="16" y="18" fill="#FFFFFF" font-size="12" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">1. API GATEWAY &amp; AUTHENTICATION LAYER</text>
+    <rect x="0" y="0" width="490" height="98" rx="10" fill="#120E24" stroke="#8B5CF6" stroke-width="1.8"/>
+    <rect x="0" y="0" width="490" height="26" rx="8" fill="url(#violet-primary)"/>
+    <text x="16" y="18" fill="#FFFFFF" font-size="11.5" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">1. API GATEWAY &amp; SECURITY LAYER</text>
 
     <!-- Sub-boxes in Layer 1 -->
-    <g transform="translate(16, 36)">
-      <rect width="135" height="46" rx="5" fill="#0A0B0E" stroke="#EA533D" stroke-width="1.2"/>
-      <text x="10" y="20" fill="#FFA07A" font-size="11" font-weight="800">FastAPI Gateway</text>
-      <text x="10" y="36" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">Async routing</text>
+    <g transform="translate(16, 38)">
+      <rect width="140" height="48" rx="6" fill="#191336" stroke="#A78BFA" stroke-width="1.2"/>
+      <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">FastAPI Gateway</text>
+      <text x="10" y="36" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Async routing &amp; CORS</text>
     </g>
-    <g transform="translate(170, 36)">
-      <rect width="145" height="46" rx="5" fill="#0A0B0E" stroke="#EA533D" stroke-width="1.2"/>
-      <text x="10" y="20" fill="#FFA07A" font-size="11" font-weight="800">JWT Security Guard</text>
-      <text x="10" y="36" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">Token validation</text>
+    <g transform="translate(172, 38)">
+      <rect width="145" height="48" rx="6" fill="#191336" stroke="#A78BFA" stroke-width="1.2"/>
+      <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">JWT Security Guard</text>
+      <text x="10" y="36" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Bearer token auth</text>
     </g>
-    <g transform="translate(335, 36)">
-      <rect width="135" height="46" rx="5" fill="#0A0B0E" stroke="#EA533D" stroke-width="1.2"/>
-      <text x="10" y="20" fill="#FFA07A" font-size="11" font-weight="800">Rate Limiter</text>
-      <text x="10" y="36" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">DDoS protection</text>
-    </g>
-
-    <!-- Layer 2: Core Processing & Grounded AI Engine -->
-    <rect x="0" y="115" width="490" height="115" rx="8" fill="#161214" stroke="#FF6E40" stroke-width="2"/>
-    <rect x="0" y="115" width="490" height="26" rx="6" fill="#FF6E40"/>
-    <text x="16" y="133" fill="#FFFFFF" font-size="12" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">2. GROUNDED AI &amp; RAG ENGINE</text>
-
-    <!-- Sub-boxes in Layer 2 -->
-    <g transform="translate(16, 151)">
-      <rect width="145" height="64" rx="5" fill="#0B090E" stroke="#FF8A65" stroke-width="1.2"/>
-      <text x="10" y="22" fill="#FF8A65" font-size="11" font-weight="800">Context RAG Engine</text>
-      <text x="10" y="38" fill="#FAF8F0" font-size="9">Vector chunk lookup</text>
-      <text x="10" y="52" fill="#FAF8F0" opacity="0.65" font-size="8" font-family="'Fragment Mono', monospace">Top-k semantic match</text>
-    </g>
-    <g transform="translate(175, 151)">
-      <rect width="145" height="64" rx="5" fill="#0B090E" stroke="#FF8A65" stroke-width="1.2"/>
-      <text x="10" y="22" fill="#FF8A65" font-size="11" font-weight="800">Grounded Synthesizer</text>
-      <text x="10" y="38" fill="#FAF8F0" font-size="9">Evidence validation</text>
-      <text x="10" y="52" fill="#FAF8F0" opacity="0.65" font-size="8" font-family="'Fragment Mono', monospace">Zero hallucination</text>
-    </g>
-    <g transform="translate(332, 151)">
-      <rect width="140" height="64" rx="5" fill="#0B090E" stroke="#FF8A65" stroke-width="1.2"/>
-      <text x="10" y="22" fill="#FF8A65" font-size="11" font-weight="800">Reminder Scheduler</text>
-      <text x="10" y="38" fill="#FAF8F0" font-size="9">Dynamic pacing</text>
-      <text x="10" y="52" fill="#FAF8F0" opacity="0.65" font-size="8" font-family="'Fragment Mono', monospace">Auto deadline alerts</text>
+    <g transform="translate(332, 38)">
+      <rect width="142" height="48" rx="6" fill="#191336" stroke="#A78BFA" stroke-width="1.2"/>
+      <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">Rate Limiting</text>
+      <text x="10" y="36" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Token bucket policy</text>
     </g>
 
-    <!-- Layer 3: Persistence & State Management -->
-    <rect x="0" y="250" width="490" height="90" rx="8" fill="#141113" stroke="#EA533D" stroke-width="2"/>
-    <rect x="0" y="250" width="490" height="26" rx="6" fill="#EA533D"/>
-    <text x="16" y="268" fill="#FFFFFF" font-size="12" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">3. PERSISTENCE LAYER &amp; STORAGE</text>
+    <!-- Layer 2: Grounded AI & RAG Engine -->
+    <g transform="translate(0, 115)">
+      <rect x="0" y="0" width="490" height="115" rx="10" fill="#120E24" stroke="#A855F7" stroke-width="1.8"/>
+      <rect x="0" y="0" width="490" height="26" rx="8" fill="url(#lavender-gradient)"/>
+      <text x="16" y="18" fill="#FFFFFF" font-size="11.5" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">2. GROUNDED AI &amp; RAG ENGINE</text>
 
-    <!-- Sub-boxes in Layer 3 -->
-    <g transform="translate(16, 286)">
-      <rect width="145" height="44" rx="5" fill="#0A0B0E" stroke="#FFA07A" stroke-width="1.2"/>
-      <text x="10" y="19" fill="#FFA07A" font-size="11" font-weight="800">PostgreSQL Store</text>
-      <text x="10" y="34" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">Relational state &amp; auth</text>
+      <g transform="translate(16, 38)">
+        <rect width="140" height="62" rx="6" fill="#191336" stroke="#C084FC" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#F5F3FF" font-size="10.5" font-weight="800">Context Retriever</text>
+        <text x="10" y="36" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Syllabus &amp; rubric</text>
+        <text x="10" y="52" fill="#A78BFA" font-size="8" font-family="'Fragment Mono', monospace">Hybrid search</text>
+      </g>
+      <g transform="translate(172, 38)">
+        <rect width="145" height="62" rx="6" fill="#191336" stroke="#C084FC" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#F5F3FF" font-size="10.5" font-weight="800">Vector Embeddings</text>
+        <text x="10" y="36" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Semantic chunks</text>
+        <text x="10" y="52" fill="#A78BFA" font-size="8" font-family="'Fragment Mono', monospace">Cosine similarity</text>
+      </g>
+      <g transform="translate(332, 38)">
+        <rect width="142" height="62" rx="6" fill="#191336" stroke="#C084FC" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#F5F3FF" font-size="10.5" font-weight="800">AI Synthesizer</text>
+        <text x="10" y="36" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Grounded guidance</text>
+        <text x="10" y="52" fill="#A78BFA" font-size="8" font-family="'Fragment Mono', monospace">Zero hallucinations</text>
+      </g>
     </g>
-    <g transform="translate(175, 286)">
-      <rect width="145" height="44" rx="5" fill="#0A0B0E" stroke="#FFA07A" stroke-width="1.2"/>
-      <text x="10" y="19" fill="#FFA07A" font-size="11" font-weight="800">Vector Embeddings</text>
-      <text x="10" y="34" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">Cosine similarity idx</text>
-    </g>
-    <g transform="translate(332, 286)">
-      <rect width="140" height="44" rx="5" fill="#0A0B0E" stroke="#FFA07A" stroke-width="1.2"/>
-      <text x="10" y="19" fill="#FFA07A" font-size="11" font-weight="800">Session Workspace</text>
-      <text x="10" y="34" fill="#FAF8F0" opacity="0.7" font-size="9" font-family="'Fragment Mono', monospace">Student active cache</text>
+
+    <!-- Layer 3: Persistence & Scheduling -->
+    <g transform="translate(0, 246)">
+      <rect x="0" y="0" width="490" height="94" rx="10" fill="#120E24" stroke="#7C3AED" stroke-width="1.8"/>
+      <rect x="0" y="0" width="490" height="26" rx="8" fill="#6D28D9"/>
+      <text x="16" y="18" fill="#FFFFFF" font-size="11.5" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">3. PERSISTENCE &amp; SCHEDULING</text>
+
+      <g transform="translate(16, 36)">
+        <rect width="140" height="46" rx="6" fill="#191336" stroke="#8B5CF6" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">PostgreSQL DB</text>
+        <text x="10" y="34" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">User profiles &amp; tasks</text>
+      </g>
+      <g transform="translate(172, 36)">
+        <rect width="145" height="46" rx="6" fill="#191336" stroke="#8B5CF6" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">Reminder Queue</text>
+        <text x="10" y="34" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Async cron worker</text>
+      </g>
+      <g transform="translate(332, 36)">
+        <rect width="142" height="46" rx="6" fill="#191336" stroke="#8B5CF6" stroke-width="1.2"/>
+        <text x="10" y="20" fill="#E9D5FF" font-size="10.5" font-weight="800">Cache &amp; Sessions</text>
+        <text x="10" y="34" fill="#C4B5FD" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Sub-10ms response</text>
+      </g>
     </g>
   </g>
 
-  <!-- Flow Arrow from Core to Outputs -->
-  <path d="M 720 250 L 755 250" stroke="#EA533D" stroke-width="3" stroke-dasharray="6,3" fill="none"/>
+  <!-- Flow Connector 2 -->
+  <path d="M 715 250 L 755 250" stroke="#C084FC" stroke-width="2.5" stroke-dasharray="6,4" fill="none"/>
+  <polygon points="757,250 749,245 749,255" fill="#C084FC"/>
 
-  <!-- RIGHT OUTPUTS LAYER -->
-  <g id="outputs-layer" transform="translate(760, 80)">
-    <rect x="0" y="0" width="165" height="340" rx="8" fill="#151215" stroke="#EA533D" stroke-width="2"/>
-    <rect x="0" y="0" width="165" height="32" rx="6" fill="#EA533D"/>
-    <text x="82" y="21" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">STUDENT OUTPUTS</text>
+  <!-- RIGHT: OUTPUT LAYER -->
+  <g id="output-layer" transform="translate(760, 80)">
+    <rect x="0" y="0" width="165" height="340" rx="10" fill="#120E24" stroke="#8B5CF6" stroke-width="1.8"/>
+    <rect x="0" y="0" width="165" height="32" rx="8" fill="url(#violet-primary)"/>
+    <text x="82" y="21" text-anchor="middle" fill="#FFFFFF" font-size="11.5" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">CLIENT INTERFACES</text>
 
-    <!-- Output Items -->
     <g transform="translate(10, 48)">
-      <rect width="145" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Verified Guidance</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Grounded citations</text>
+      <rect width="145" height="54" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1"/>
+      <text x="10" y="22" fill="#FFFFFF" font-size="10.5" font-weight="700">Student Workspace</text>
+      <text x="10" y="38" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Clean UI dashboard</text>
     </g>
-    <g transform="translate(10, 108)">
-      <rect width="145" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Automated Alerts</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Scheduled notifications</text>
+    <g transform="translate(10, 114)">
+      <rect width="145" height="54" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1"/>
+      <text x="10" y="22" fill="#FFFFFF" font-size="10.5" font-weight="700">Guided Recommendations</text>
+      <text x="10" y="38" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Step-by-step roadmap</text>
     </g>
-    <g transform="translate(10, 168)">
-      <rect width="145" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Actionable Plan</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Step-by-step roadmap</text>
+    <g transform="translate(10, 180)">
+      <rect width="145" height="54" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1"/>
+      <text x="10" y="22" fill="#FFFFFF" font-size="10.5" font-weight="700">Deadline Alerts</text>
+      <text x="10" y="38" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Automated email/SMS</text>
     </g>
-    <g transform="translate(10, 228)">
-      <rect width="145" height="48" rx="6" fill="#0C0B0F" stroke="#EA533D" stroke-width="1"/>
-      <text x="12" y="22" fill="#FFFFFF" font-size="11" font-weight="700">Progress Tracker</text>
-      <text x="12" y="38" fill="#FAF8F0" opacity="0.75" font-size="9" font-family="'Fragment Mono', monospace">Academic sync metrics</text>
+    <g transform="translate(10, 246)">
+      <rect width="145" height="54" rx="6" fill="#1A1433" stroke="#A78BFA" stroke-width="1"/>
+      <text x="10" y="22" fill="#FFFFFF" font-size="10.5" font-weight="700">Progress Telemetry</text>
+      <text x="10" y="38" fill="#DDD6FE" opacity="0.85" font-size="8.5" font-family="'Fragment Mono', monospace">Weekly performance</text>
     </g>
   </g>
 
-  <!-- BOTTOM RETRO STATUS BAR -->
-  <g id="bottom-bar" transform="translate(32, 442)">
-    <rect width="893" height="66" rx="8" fill="#141113" stroke="#EA533D" stroke-width="1.5" opacity="0.95"/>
-    <g transform="translate(20, 18)">
-      <circle cx="10" cy="15" r="5" fill="#EA533D" filter="url(#glow-orange)"/>
-      <text x="24" y="19" fill="#FFFFFF" font-size="12" font-weight="700">SAGE CORE STATUS: OPERATIONAL</text>
-      <text x="24" y="34" fill="#FAF8F0" opacity="0.75" font-size="10" font-family="'Fragment Mono', monospace">END-TO-END RAG PIPELINE · 99.8% ACCURACY RATE</text>
-    </g>
-    <g transform="translate(560, 20)">
-      <rect width="140" height="26" rx="4" fill="#1F1514" stroke="#EA533D" stroke-width="1"/>
-      <text x="70" y="17" text-anchor="middle" fill="#EA533D" font-size="10" font-weight="700" font-family="'Fragment Mono', monospace">FASTAPI + POSTGRESQL</text>
+  <!-- Bottom Tech Ticker in Lavender & Violet -->
+  <g transform="translate(32, 438)">
+    <rect width="893" height="74" rx="10" fill="#100C22" stroke="#8B5CF6" stroke-width="1.4"/>
+    <rect x="14" y="12" width="130" height="24" rx="4" fill="#6D28D9"/>
+    <text x="79" y="28" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="900" font-family="'Fragment Mono', monospace" letter-spacing="1">STACK CREDENTIALS</text>
 
-      <rect x="155" y="0" width="140" height="26" rx="4" fill="#1F1514" stroke="#FF6E40" stroke-width="1"/>
-      <text x="225" y="17" text-anchor="middle" fill="#FF8A65" font-size="10" font-weight="700" font-family="'Fragment Mono', monospace">GROUNDED LLM RAG</text>
+    <!-- Badges Row -->
+    <g transform="translate(155, 12)">
+      <rect x="0" y="0" width="105" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="52" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">FastAPI (Python)</text>
+
+      <rect x="115" y="0" width="115" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="172" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">JWT Authentication</text>
+
+      <rect x="240" y="0" width="115" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="297" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">PostgreSQL (SQLAlchemy)</text>
+
+      <rect x="365" y="0" width="115" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="422" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">Vector Embeddings</text>
+
+      <rect x="490" y="0" width="110" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="545" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">Docker Container</text>
+
+      <rect x="610" y="0" width="115" height="24" rx="4" fill="#1E163B" stroke="#A78BFA" stroke-width="1"/>
+      <text x="667" y="16" text-anchor="middle" fill="#E9D5FF" font-size="9.5" font-weight="700">CI/CD Pipeline</text>
     </g>
+
+    <!-- Bottom metric notes -->
+    <text x="28" y="58" fill="#DDD6FE" font-size="10" font-family="'Fragment Mono', monospace">
+      &gt; Pipeline Latency: &lt;140ms  |  Accuracy Check: Strict Context Grounding  |  Security: End-to-end Token Auth
+    </text>
   </g>
 </svg>

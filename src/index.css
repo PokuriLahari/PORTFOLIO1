@@ -22,6 +22,7 @@ body {
   background-color: #FAF8F0;
   color: #111111;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, .font-heading {
@@ -253,12 +254,320 @@ h1, h2, h3, .font-heading {
 
 /* Inputs */
 .input-interactive {
-  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease, background-color 0.22s ease, color 0.22s ease;
 }
 .input-interactive:focus {
   border-color: #EA533D;
   box-shadow: 0 0 0 3px rgba(234, 83, 61, 0.2), 0 3px 10px rgba(0, 0, 0, 0.05);
   transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Dark Theme: Charcoal & Lavender Palette
+   Base Charcoal / Obsidian: #0C0A17 / #110E1E / #151128
+   Lavender Accents: #C4B5FD / #DDD6FE / #A78BFA / #8B5CF6
+   ========================================================================== */
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #0C0A17;
+  color: #F5F3FF;
+}
+
+html.dark .theme-bg-root {
+  background-color: #0C0A17 !important;
+  color: #F5F3FF !important;
+}
+
+html.dark .grid-line {
+  background-color: rgba(167, 139, 250, 0.09) !important;
+}
+
+/* Dark Header */
+html.dark header {
+  background-color: rgba(12, 10, 23, 0.92) !important;
+  border-bottom-color: rgba(139, 92, 246, 0.2) !important;
+}
+html.dark header.header-scrolled {
+  background-color: rgba(12, 10, 23, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark .nav-brand-title {
+  color: #F5F3FF !important;
+}
+html.dark .nav-brand-title:hover {
+  color: #EA533D !important;
+}
+
+html.dark .nav-link-item {
+  color: #C4B5FD !important;
+}
+html.dark .nav-link-item:hover {
+  color: #EA533D !important;
+}
+
+/* Dark Typography */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark .theme-heading {
+  color: #F5F3FF !important;
+}
+
+html.dark p,
+html.dark .theme-text-muted {
+  color: #C4B5FD !important;
+}
+
+html.dark .theme-subtext {
+  color: #DDD6FE !important;
+}
+
+/* Buttons in Dark Theme */
+html.dark .btn-variant-2 {
+  background-color: #17122E !important;
+  color: #F5F3FF !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+html.dark .btn-variant-2:hover {
+  background-color: #241D48 !important;
+  border-color: #A78BFA !important;
+  box-shadow: 0 4px 16px rgba(167, 139, 250, 0.25) !important;
+}
+
+/* Carousel Control Arrows */
+html.dark .carousel-arrow-btn {
+  background-color: #1A1535 !important;
+  color: #DDD6FE !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+html.dark .carousel-arrow-btn:hover {
+  background-color: #EA533D !important;
+  color: #FFFFFF !important;
+  border-color: #EA533D !important;
+}
+
+/* Badges in Dark Mode */
+html.dark .badge-card {
+  background-color: #141026 !important;
+  border-color: rgba(167, 139, 250, 0.28) !important;
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.45) !important;
+}
+html.dark .badge-card:hover {
+  border-color: #EA533D !important;
+  box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.6), 0 0 20px rgba(234, 83, 61, 0.25) !important;
+}
+html.dark .badge-card .badge-title {
+  color: #F5F3FF !important;
+}
+html.dark .badge-card .badge-subtitle {
+  color: #A78BFA !important;
+}
+
+/* Project Cards in Dark Mode */
+html.dark .project-card {
+  background-color: #141026 !important;
+  border-color: rgba(167, 139, 250, 0.28) !important;
+  box-shadow: 0 16px 38px -8px rgba(0, 0, 0, 0.6), 0 0 25px rgba(139, 92, 246, 0.12) !important;
+}
+html.dark .project-card:hover {
+  border-color: #A78BFA !important;
+  box-shadow: 0 22px 45px -8px rgba(0, 0, 0, 0.7), 0 0 35px rgba(167, 139, 250, 0.25) !important;
+}
+html.dark .project-card h3 a {
+  color: #F5F3FF !important;
+}
+html.dark .project-card h3 a:hover {
+  color: #EA533D !important;
+}
+
+/* Tags in Dark Mode */
+html.dark .font-mono-tag-neutral {
+  background-color: #1A1435 !important;
+  color: #DDD6FE !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+
+/* Certifications Alternating Banners in Dark Mode:
+   The Red banners stay high-impact vibrant Coral/Red.
+   The alternating light banners switch from white to rich charcoal-lavender (#18132F). */
+html.dark .cert-banner-light {
+  background-color: #18132F !important;
+  color: #F5F3FF !important;
+  border-color: rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.45) !important;
+}
+html.dark .cert-banner-light .cert-title {
+  color: #F5F3FF !important;
+}
+html.dark .cert-banner-light .cert-desc {
+  color: #C4B5FD !important;
+}
+html.dark .cert-banner-light .cert-icon-bg {
+  background-color: rgba(139, 92, 246, 0.18) !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+
+/* Scalloped Divider Separator */
+html.dark .scalloped-divider-bar {
+  border-top-color: rgba(167, 139, 250, 0.3) !important;
+}
+
+/* Contact Inputs in Dark Mode */
+html.dark .input-interactive {
+  background-color: #16122C !important;
+  color: #F5F3FF !important;
+  border-color: rgba(167, 139, 250, 0.28) !important;
+}
+html.dark .input-interactive:focus {
+  border-color: #EA533D !important;
+  box-shadow: 0 0 0 3px rgba(234, 83, 61, 0.25), 0 0 16px rgba(234, 83, 61, 0.18) !important;
+}
+html.dark .input-interactive::placeholder {
+  color: rgba(196, 181, 253, 0.45) !important;
+}
+
+/* Footer in Dark Mode */
+html.dark footer {
+  background-color: #0E0B1B !important;
+  border-top-color: rgba(167, 139, 250, 0.2) !important;
+}
+html.dark footer .footer-divider {
+  border-top-color: rgba(167, 139, 250, 0.2) !important;
+}
+html.dark .social-btn {
+  background-color: #181330 !important;
+  color: #DDD6FE !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+html.dark .social-btn:hover {
+  background-color: #EA533D !important;
+  border-color: #EA533D !important;
+  color: #FFFFFF !important;
+}
+
+/* Floating Navigation Controls */
+html.dark .floating-nav-panel {
+  background-color: rgba(22, 17, 44, 0.95) !important;
+  border-color: rgba(167, 139, 250, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* ==========================================================================
+   Project Card Expandable Tech Stack & Duration Drawer
+   ========================================================================== */
+.project-details-panel {
+  border: 1px dashed rgba(17, 17, 17, 0.2);
+  background-color: rgba(250, 248, 240, 0.75);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+html.dark .project-details-panel {
+  border-color: rgba(167, 139, 250, 0.25) !important;
+  background-color: rgba(18, 14, 38, 0.75) !important;
+}
+
+.tech-stack-pill {
+  background-color: #FFFFFF;
+  color: #111111;
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  font-family: 'Fragment Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tech-stack-pill:hover {
+  border-color: #EA533D;
+  color: #EA533D;
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 8px rgba(234, 83, 61, 0.15);
+}
+html.dark .tech-stack-pill {
+  background-color: #1A1435 !important;
+  color: #DDD6FE !important;
+  border-color: rgba(167, 139, 250, 0.3) !important;
+}
+html.dark .tech-stack-pill:hover {
+  border-color: #A78BFA !important;
+  color: #F5F3FF !important;
+  background-color: #241D48 !important;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.25);
+}
+
+.btn-toggle-expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1.05rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid #111111;
+  background-color: #FFFFFF;
+  color: #111111;
+}
+.btn-toggle-expand:hover {
+  background-color: #FAF8F0;
+  border-color: #EA533D;
+  color: #EA533D;
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(234, 83, 61, 0.15);
+}
+.btn-toggle-expand:active {
+  transform: translateY(0);
+}
+html.dark .btn-toggle-expand {
+  background-color: #1A1535 !important;
+  color: #DDD6FE !important;
+  border-color: rgba(167, 139, 250, 0.35) !important;
+}
+html.dark .btn-toggle-expand:hover {
+  background-color: #241D48 !important;
+  border-color: #A78BFA !important;
+  color: #F5F3FF !important;
+  box-shadow: 0 0 14px rgba(167, 139, 250, 0.25) !important;
+}
+
+.project-duration-badge {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background-color: rgba(17, 17, 17, 0.06);
+  color: #111111;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  display: inline-flex;
+  align-items: center;
+}
+html.dark .project-duration-badge {
+  background-color: rgba(139, 92, 246, 0.22) !important;
+  color: #F5F3FF !important;
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.25) !important;
+}
+
+.project-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Fragment Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #444444;
+}
+html.dark .project-section-title {
+  color: #DDD6FE !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

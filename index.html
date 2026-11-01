@@ -9,6 +9,55 @@
     <meta property="og:description" content="Personal portfolio website for Pokuri Lahari, showcasing computer science projects, cloud certifications, AWS builder articles, and achievements." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- Resilient window.fetch shim: ensures window.fetch has both getter & setter so browser extensions (VPNs, proxies, interceptors) do not throw 'Cannot set property fetch which has only a getter' -->
+    <script>
+      (function() {
+        try {
+          var orig = window.fetch ? window.fetch.bind(window) : null;
+          var cur = orig;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return cur; },
+            set: function(v) { cur = typeof v === 'function' ? v : orig; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            if (typeof Window !== 'undefined' && Window.prototype) {
+              var pOrig = Window.prototype.fetch;
+              Object.defineProperty(Window.prototype, 'fetch', {
+                get: function() { return cur || pOrig; },
+                set: function(v) { cur = v; },
+                configurable: true,
+                enumerable: true
+              });
+            }
+          } catch (e2) {}
+        }
+
+        // Suppress unhandled third-party extension errors from polluting applet error listeners
+        window.addEventListener('error', function(e) {
+          var f = (e && e.filename) || '';
+          var s = (e && e.error && e.error.stack) || '';
+          if (f.indexOf('chrome-extension://') !== -1 || f.indexOf('moz-extension://') !== -1 || s.indexOf('chrome-extension://') !== -1 || s.indexOf('moz-extension://') !== -1) {
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+            if (e.stopPropagation) e.stopPropagation();
+            e.preventDefault();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          var s = (e && e.reason && e.reason.stack) || (typeof (e && e.reason) === 'string' ? e.reason : '');
+          if (s.indexOf('chrome-extension://') !== -1 || s.indexOf('moz-extension://') !== -1) {
+            if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+            if (e.stopPropagation) e.stopPropagation();
+            e.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
     <!-- Google Fonts: Bricolage Grotesque, Fragment Mono & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
