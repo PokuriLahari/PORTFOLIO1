@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ThemeToggle } from './components/ThemeToggle';
-import { getInitialTheme, applyThemeToDocument, toggleThemeValue, type Theme } from './utils/theme';
 import { toggleProjectExpansion, isProjectExpanded, getProjectDuration } from './utils/project-expand';
 
 // Real Badge Data including AI for Bharat & crisp vector Microsoft Certified Fundamentals
@@ -52,7 +50,6 @@ const SECTIONS = [
 ];
 
 export default function App() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [headerScrolled, setHeaderScrolled] = useState<boolean>(false);
   const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
@@ -64,14 +61,18 @@ export default function App() {
     githubUrl?: string;
   } | null>(null);
 
-  // Synchronize document theme class and localStorage
+  // Ensure default light mode is active and any cached dark mode is cleared
   useEffect(() => {
-    applyThemeToDocument(theme);
-  }, [theme]);
-
-  const handleToggleTheme = () => {
-    setTheme((prev) => toggleThemeValue(prev));
-  };
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.style.colorScheme = 'light';
+      try {
+        localStorage.removeItem('theme');
+      } catch {
+        // Ignore storage errors in restricted contexts
+      }
+    }
+  }, []);
 
   const handleToggleProject = (projectId: string) => {
     setExpandedProjects((prev) => toggleProjectExpansion(prev, projectId));
@@ -224,8 +225,7 @@ export default function App() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <ThemeToggle theme={theme} onToggle={handleToggleTheme} />
+          <div className="flex items-center">
             <button
               onClick={() => {
                 scrollTo('contact');
