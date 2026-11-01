@@ -1,0 +1,921 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pokuri Lahari | Portfolio</title>
+<!-- Google Fonts: Bricolage Grotesque & Fragment Mono & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;600;700;800&amp;family=Fragment+Mono:ital@0;1&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              50: '#FDFBF7',
+              100: '#FAF8F0',
+              200: '#F4EFE0'
+            },
+            coral: {
+              DEFAULT: '#EA533D',
+              hover: '#FF5A43',
+              pressed: '#d94530',
+              light: '#FF6B57'
+            },
+            charcoal: '#111111',
+            dark80: '#333333',
+            brandYellow: '#FDF06F',
+            brandGreen: '#8CD85E',
+            brandRed: '#FF5252'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            display: ['"Bricolage Grotesque"', 'sans-serif'],
+            mono: ['"Fragment Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Typography, Micro-interactions and Motion System -->
+<style data-purpose="custom-layout">
+    body {
+      background-color: #FAF8F0;
+      color: #111111;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    h1, h2, h3, .font-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #111111;
+    }
+
+    .font-mono-tag {
+      font-family: 'Fragment Mono', monospace;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      cursor: default;
+    }
+    .font-mono-tag:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    
+    /* Clean sharp bordered aesthetic */
+    .card-border {
+      border: 1.5px solid #111111;
+    }
+
+    .border-subtle {
+      border: 1px solid rgba(17, 17, 17, 0.15);
+    }
+
+    /* Variant 1 Primary Button with Enhanced Luminous Glow & Scale Physics */
+    .btn-variant-1 {
+      background-color: #EA533D;
+      color: #FFFFFF;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, box-shadow;
+      cursor: pointer;
+    }
+    .btn-variant-1:hover {
+      background-color: #FF5A43;
+      box-shadow: 0 0 20px 4px rgba(255, 90, 67, 0.65), 0 8px 20px -2px rgba(234, 83, 61, 0.4);
+      transform: translateY(-2px) scale(1.025);
+    }
+    .btn-variant-1:active {
+      background-color: #d94530;
+      transform: translateY(0.5px) scale(0.98);
+      box-shadow: 0 0 10px 2px rgba(234, 83, 61, 0.4);
+    }
+
+    /* Active Highlight state for Contact Button in Header */
+    .btn-variant-1.nav-btn-active {
+      box-shadow: 0 0 0 3px #111111, 0 0 22px 6px rgba(234, 83, 61, 0.7);
+      background-color: #FF5A43;
+      transform: scale(1.04);
+    }
+
+    /* Variant 2 Secondary Pill with Interactive Lift & Glow */
+    .btn-variant-2 {
+      background-color: #FFFFFF;
+      color: #111111;
+      border: 1.5px solid #111111;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, background-color, box-shadow;
+      cursor: pointer;
+    }
+    .btn-variant-2:hover {
+      background-color: #FFFDF9;
+      border-color: #000000;
+      box-shadow: 0 6px 16px rgba(17, 17, 17, 0.09), 0 0 0 1px rgba(17, 17, 17, 0.12);
+      transform: translateY(-2px);
+    }
+    .btn-variant-2:active {
+      background-color: #F0EDE4;
+      transform: translateY(0);
+    }
+
+    /* Navigation Active Link Styling */
+    .nav-link {
+      position: relative;
+      transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), font-weight 0.2s ease;
+    }
+    .nav-indicator {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #EA533D;
+      border-radius: 9999px;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    .nav-link:hover .nav-indicator {
+      width: 100%;
+      opacity: 0.6;
+    }
+    .nav-link.active-nav-link {
+      color: #EA533D !important;
+      font-weight: 600 !important;
+    }
+    .nav-link.active-nav-link .nav-indicator {
+      width: 100% !important;
+      opacity: 1 !important;
+    }
+
+    /* Footer Navigation Active Link Styling */
+    .footer-nav-link {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-nav-link.active-nav-link {
+      color: #EA533D !important;
+      font-weight: 600 !important;
+      transform: translateX(4px);
+    }
+
+    /* Portrait Image Card Floating Ambient Motion & Glow */
+    @keyframes floatPortrait {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-5px) rotate(0.4deg);
+      }
+    }
+    .portrait-card-wrapper {
+      animation: floatPortrait 6s ease-in-out infinite;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portrait-card-wrapper:hover {
+      animation-play-state: paused;
+      transform: translateY(-4px) scale(1.02);
+    }
+    .portrait-glow {
+      box-shadow: 0 0 26px 4px rgba(255, 90, 67, 0.28), 0 16px 36px -6px rgba(17, 17, 17, 0.12);
+      transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .portrait-card-wrapper:hover .portrait-glow {
+      box-shadow: 0 0 34px 8px rgba(255, 90, 67, 0.45), 0 20px 40px -4px rgba(17, 17, 17, 0.18);
+    }
+
+    /* Badge Card Hover & Tilt Lift */
+    .badge-card {
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, box-shadow, border-color;
+    }
+    .badge-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(234, 83, 61, 0.08);
+      border-color: #EA533D;
+    }
+    .badge-card svg, .badge-card > div {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .badge-card:hover svg, .badge-card:hover > div {
+      transform: scale(1.04);
+    }
+
+    /* Continuous Seamless Marquee Animation */
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+      will-change: transform;
+    }
+    .marquee-container:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    .marquee-mask {
+      mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    }
+
+    /* Project Cards Hover Interaction */
+    .project-card {
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.32s ease;
+      will-change: transform, box-shadow;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.12), 0 8px 24px -4px rgba(234, 83, 61, 0.18) !important;
+      border-color: #111111;
+    }
+
+    /* Architecture Flow Interactive Sequence */
+    .flow-node {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: default;
+    }
+    .flow-node:hover {
+      transform: translateY(-2px);
+      border-color: #EA533D;
+      background-color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(234, 83, 61, 0.15);
+      color: #EA533D;
+    }
+
+    /* Pulsing Green/Emerald Status Beacons */
+    @keyframes pulseRing {
+      0% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+      }
+    }
+    .status-pulse-emerald {
+      animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Certifications banner subtle lift */
+    .cert-banner {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cert-banner:hover {
+      transform: translateY(-3px) scale(1.008);
+      box-shadow: 0 10px 24px -4px rgba(0,0,0,0.12);
+    }
+
+    /* Scalloped Footer Tabs Bounce & Wave */
+    .scalloped-tab {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+      transform-origin: top center;
+    }
+    .scalloped-tab:hover {
+      transform: translateY(-8px) scaleY(1.1);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    /* Social Icon Button Magnetic/Scale Interaction */
+    .social-btn {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+    .social-btn:hover {
+      transform: translateY(-3px) scale(1.12);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Interactive Form Inputs with Floating Focus Outline */
+    .input-interactive {
+      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+    }
+    .input-interactive:focus {
+      border-color: #EA533D;
+      box-shadow: 0 0 0 3px rgba(234, 83, 61, 0.2), 0 3px 10px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    /* Scroll Reveal Animation Classes */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .portrait-card-wrapper {
+        animation: none !important;
+      }
+      .marquee-track {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-cream-100 text-charcoal min-h-screen antialiased selection:bg-coral selection:text-white"><div class="fixed inset-0 pointer-events-none z-0 flex justify-between max-w-7xl mx-auto px-6 opacity-40"><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div><div class="w-px h-full bg-black/5"></div></div>
+<!-- BEGIN: NavigationBar -->
+<header class="w-full sticky top-0 z-50 bg-cream-100/90 backdrop-blur-md border-b border-black/5 transition-all duration-300" data-purpose="site-navigation" id="main-header"><div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between"><a class="font-display font-bold text-2xl tracking-tight text-charcoal hover:text-coral transition-colors" href="#">Pokuri Lahari</a><nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-8 text-sm font-medium text-dark80"><a class="nav-link hover:text-coral py-1 cursor-pointer" data-nav="about" href="#about">About<span class="nav-indicator"></span></a><a class="nav-link hover:text-coral py-1 cursor-pointer" data-nav="projects" href="#projects">Projects<span class="nav-indicator"></span></a><a class="nav-link hover:text-coral py-1 cursor-pointer" data-nav="certifications" href="#certifications">Certifications<span class="nav-indicator"></span></a></nav><div><a class="inline-flex items-center justify-center px-6 py-2.5 rounded-full btn-variant-1 font-semibold text-sm cursor-pointer shadow-sm transition-all duration-300 nav-btn-active" data-nav="contact" href="#contact" id="nav-contact-btn">Contact Me</a></div></div></header>
+<!-- END: NavigationBar -->
+<main class="max-w-6xl mx-auto px-8 pt-16 pb-24">
+<!-- BEGIN: HeroSection -->
+<section class="relative z-10 pt-10 pb-12 reveal-on-scroll is-visible" data-purpose="hero-banner"><div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"><div class="lg:col-span-6"><h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-[7.25rem] font-extrabold tracking-tight text-charcoal leading-none italic select-none">Pokuri<br>Lahari</h1></div><div class="lg:col-span-6 lg:pt-3 space-y-6"><p class="text-base md:text-lg text-dark80 font-normal leading-relaxed max-w-xl">Computer Science and Engineering student at KLH University · 2024–2028. Exploring programming, problem-solving, and software development through hands-on projects.</p><div class="flex items-center gap-3.5 flex-wrap"><a class="px-7 py-2.5 rounded-full btn-variant-1 font-semibold text-sm cursor-pointer inline-flex items-center justify-center" href="#projects">View Projects</a><a class="px-7 py-2.5 rounded-full btn-variant-2 font-medium text-sm cursor-pointer inline-flex items-center justify-center" href="https://www.linkedin.com/in/pokuri-lahari/" rel="noopener noreferrer" target="_blank">LinkedIn</a><a class="px-7 py-2.5 rounded-full btn-variant-2 font-medium text-sm cursor-pointer inline-flex items-center justify-center" href="https://github.com/PokuriLahari" rel="noopener noreferrer" target="_blank">GitHub</a></div></div></div></section>
+<!-- END: HeroSection -->
+<!-- BEGIN: BadgesContinuousMarquee -->
+<section class="relative z-10 mb-28 reveal-on-scroll is-visible" data-purpose="certification-badges">
+<div class="relative w-full overflow-hidden marquee-container marquee-mask py-4 -my-4">
+<!-- Continuous Scrolling Track containing 2 sets for a seamless infinite loop -->
+<div class="marquee-track flex gap-5">
+<!-- Set 1 -->
+<div class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex flex-col items-center justify-center">
+<svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 100">
+<polygon fill="#F8FAFC" points="50,5 92,28 92,72 50,95 8,72 8,28" stroke="#0F172A" stroke-width="2.5"></polygon>
+<polygon fill="#FFFFFF" points="50,11 86,31 86,69 50,89 14,69 14,31" stroke="#E2E8F0" stroke-width="1.5"></polygon>
+<path d="M42 24 L50 16 L58 24 L54 28 L50 24 L46 28 Z" fill="#EA533D"></path>
+<text fill="#0F172A" font-size="8" font-weight="800" letter-spacing="1" text-anchor="middle" x="50" y="36">AVIATRIX</text>
+<text fill="#0F172A" font-size="16" font-weight="900" text-anchor="middle" x="50" y="52">ACE</text>
+<polygon fill="#EA533D" points="50,57 52,62 57,62 53,65 55,70 50,67 45,70 47,65 43,62 48,62"></polygon>
+<rect fill="#0F172A" height="15" rx="3" width="64" x="18" y="71"></rect>
+<text fill="#FFFFFF" font-size="7.5" font-weight="700" letter-spacing="0.5" text-anchor="middle" x="50" y="82">ASSOCIATE</text>
+</svg>
+</div>
+</div>
+<div class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex items-center justify-center">
+<div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-[#1E202A] border-[3px] border-emerald-400/80 flex flex-col items-center justify-center text-center p-2 relative overflow-hidden shadow-inner">
+<div class="text-[9px] text-gray-300 font-semibold tracking-wide">Google Cloud</div>
+<div class="text-amber-400 font-black text-lg tracking-wider uppercase mt-1">ARCADE</div>
+<div class="text-[9px] text-emerald-400 font-mono tracking-widest mt-0.5">GDP ARCADE</div>
+<div class="mt-3 w-10 h-10 rounded-full bg-blue-500 border border-blue-300 flex items-center justify-center text-sm shadow-md">🌐</div>
+</div>
+</div>
+</div>
+<div class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex flex-col items-center justify-center">
+<svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 100">
+<polygon fill="#232F3E" points="50,4 92,26 92,74 50,96 8,74 8,26" stroke="#131A22" stroke-width="2"></polygon>
+<polygon fill="#2C3B4D" points="50,9 87,29 87,71 50,91 13,71 13,29"></polygon>
+<text fill="#FF9900" font-size="9" font-weight="900" text-anchor="middle" x="50" y="24">aws</text>
+<path d="M43 27 Q50 31 57 27" fill="none" stroke="#FF9900" stroke-linecap="round" stroke-width="1.2"></path>
+<text fill="#FFFFFF" font-size="6.5" font-weight="500" text-anchor="middle" x="50" y="35">certified</text>
+<text fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle" x="50" y="52">Cloud</text>
+<text fill="#FFFFFF" font-size="9" font-weight="800" text-anchor="middle" x="50" y="63">Practitioner</text>
+<polygon fill="#FF9900" points="50,90 86,71 86,75 50,95 14,75 14,71"></polygon>
+<rect fill="#1B2633" height="11" rx="2" width="60" x="20" y="70"></rect>
+<text fill="#CBD5E1" font-size="5.5" font-weight="700" letter-spacing="1" text-anchor="middle" x="50" y="78.5">FOUNDATIONAL</text>
+</svg>
+</div>
+</div>
+
+<!-- Set 2 (Identical duplicate for seamless continuous infinite scroll) -->
+<div aria-hidden="true" class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex flex-col items-center justify-center">
+<svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 100">
+<polygon fill="#F8FAFC" points="50,5 92,28 92,72 50,95 8,72 8,28" stroke="#0F172A" stroke-width="2.5"></polygon>
+<polygon fill="#FFFFFF" points="50,11 86,31 86,69 50,89 14,69 14,31" stroke="#E2E8F0" stroke-width="1.5"></polygon>
+<path d="M42 24 L50 16 L58 24 L54 28 L50 24 L46 28 Z" fill="#EA533D"></path>
+<text fill="#0F172A" font-size="8" font-weight="800" letter-spacing="1" text-anchor="middle" x="50" y="36">AVIATRIX</text>
+<text fill="#0F172A" font-size="16" font-weight="900" text-anchor="middle" x="50" y="52">ACE</text>
+<polygon fill="#EA533D" points="50,57 52,62 57,62 53,65 55,70 50,67 45,70 47,65 43,62 48,62"></polygon>
+<rect fill="#0F172A" height="15" rx="3" width="64" x="18" y="71"></rect>
+<text fill="#FFFFFF" font-size="7.5" font-weight="700" letter-spacing="0.5" text-anchor="middle" x="50" y="82">ASSOCIATE</text>
+</svg>
+</div>
+</div>
+<div aria-hidden="true" class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex items-center justify-center">
+<div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-[#1E202A] border-[3px] border-emerald-400/80 flex flex-col items-center justify-center text-center p-2 relative overflow-hidden shadow-inner">
+<div class="text-[9px] text-gray-300 font-semibold tracking-wide">Google Cloud</div>
+<div class="text-amber-400 font-black text-lg tracking-wider uppercase mt-1">ARCADE</div>
+<div class="text-[9px] text-emerald-400 font-mono tracking-widest mt-0.5">GDP ARCADE</div>
+<div class="mt-3 w-10 h-10 rounded-full bg-blue-500 border border-blue-300 flex items-center justify-center text-sm shadow-md">🌐</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="badge-card flex-shrink-0 w-64 md:w-72 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 card-border flex flex-col items-center justify-center min-h-[260px] md:min-h-[290px] shadow-xs cursor-pointer select-none">
+<div class="relative w-44 h-44 md:w-52 md:h-52 flex flex-col items-center justify-center">
+<svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 100">
+<polygon fill="#232F3E" points="50,4 92,26 92,74 50,96 8,74 8,26" stroke="#131A22" stroke-width="2"></polygon>
+<polygon fill="#2C3B4D" points="50,9 87,29 87,71 50,91 13,71 13,29"></polygon>
+<text fill="#FF9900" font-size="9" font-weight="900" text-anchor="middle" x="50" y="24">aws</text>
+<path d="M43 27 Q50 31 57 27" fill="none" stroke="#FF9900" stroke-linecap="round" stroke-width="1.2"></path>
+<text fill="#FFFFFF" font-size="6.5" font-weight="500" text-anchor="middle" x="50" y="35">certified</text>
+<text fill="#FFFFFF" font-size="10" font-weight="900" text-anchor="middle" x="50" y="52">Cloud</text>
+<text fill="#FFFFFF" font-size="9" font-weight="800" text-anchor="middle" x="50" y="63">Practitioner</text>
+<polygon fill="#FF9900" points="50,90 86,71 86,75 50,95 14,75 14,71"></polygon>
+<rect fill="#1B2633" height="11" rx="2" width="60" x="20" y="70"></rect>
+<text fill="#CBD5E1" font-size="5.5" font-weight="700" letter-spacing="1" text-anchor="middle" x="50" y="78.5">FOUNDATIONAL</text>
+</svg>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+<!-- END: BadgesContinuousMarquee -->
+<!-- BEGIN: AboutMeSection -->
+<section class="py-12 mb-32 scroll-mt-24 reveal-on-scroll is-visible" data-purpose="about-me" id="about">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
+<!-- Text Column -->
+<div class="md:col-span-7 space-y-6">
+<h2 class="text-5xl md:text-6xl font-bold tracking-tight text-charcoal italic">
+            About Me
+          </h2>
+<p class="text-lg text-dark80 leading-relaxed font-normal">I'm Pokuri Lahari, pursuing Computer Science and Engineering at KLH University (2024–2028) and serving as a Student Builder Group Leader (2020–2027). I'm interested in programming, problem-solving, and exploring how software can turn ideas into useful solutions. Here, I share my projects and learning journey.</p>
+</div>
+<!-- Portrait Image Column with Breathing / Floating Ambient Movement & Glow -->
+<div class="md:col-span-5 flex justify-center md:justify-end">
+<div class="portrait-card-wrapper">
+<div class="relative w-64 md:w-72 aspect-[3/4] rounded-3xl overflow-hidden border-[2.5px] border-coral portrait-glow cursor-pointer">
+<img alt="Pokuri Lahari Portrait" class="w-full h-full object-cover object-center rounded-3xl transition-transform duration-500 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgiCVZyTq7Sb21sGabyOLjHdTruLp0FX6JHwUn1OzwFkrL_DV8kURYe4VHfH_UzU3Kc1DURhICESu-Ol8wy4SjPghe2k7dzyCk1ujUl6m8vYATPLePlc3c3EsF_91l_JvFYPGDs0p0ms3ItM9xb1jlIlLm5lzIZnPDxel6hxMDdkFH__XVqA-kFdEca7trXQXBBpWuVY7oxrQx7mB2XcUvrwlGUpo1k_rayEYUdSuB9FJestvYwgjwaA">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: AboutMeSection -->
+<!-- BEGIN: FeaturedProjectsSection -->
+<section class="py-12 mb-32 scroll-mt-24 reveal-on-scroll is-visible" data-purpose="featured-projects" id="projects">
+<!-- Section Header -->
+<div class="text-center mb-14">
+<h2 class="text-5xl md:text-6xl font-bold tracking-tight text-charcoal mb-3 italic">
+          Featured Projects
+        </h2>
+<p class="text-dark80 text-base md:text-lg">
+          A space for my academic projects, experiments, and hands-on learning.
+        </p>
+</div>
+<!-- Project Cards List -->
+<div class="space-y-10 max-w-5xl mx-auto">
+<!-- Project 1: Intelligent Website Change Detection -->
+<article class="project-card bg-white rounded-2xl p-7 md:p-8 card-border" style="box-shadow: rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(234, 83, 61, 0.12) 0px 6px 20px -4px;">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Left Info -->
+<div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+<div>
+<h3 class="text-2xl md:text-3xl font-bold text-charcoal tracking-tight mb-3"><a class="hover:text-coral transition-colors inline-flex items-center gap-2 group/link cursor-pointer" href="https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE" rel="noopener noreferrer" target="_blank">SAGE (Student Academic Guidance Engine) <svg class="w-5 h-5 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a></h3>
+<p class="text-base text-dark80 leading-relaxed font-normal">
+An intelligent student productivity and academic workspace featuring grounded AI assistance, task management, JWT validation, and automated reminder scheduling.
+</p>
+</div>
+<!-- System Architecture Pipeline / Flow Diagram -->
+<div class="p-3 bg-cream-50 rounded-xl border border-charcoal/20">
+<div class="text-[11px] font-bold text-charcoal uppercase tracking-wider mb-2 font-mono flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-coral animate-ping opacity-75"></span>
+<span class="w-2 h-2 rounded-full bg-coral -ml-3.5"></span> System Architecture Flow
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center font-semibold text-charcoal">
+Student Workspace
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+API Gateway
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+Core Services
+</div>
+<div class="flow-node bg-[#FDF06F] p-2 rounded-md border border-charcoal font-semibold text-charcoal flex items-center justify-center text-center shadow-xs">
+Persistence &amp; AI
+</div>
+</div>
+</div>
+<!-- Tags with Fragment Mono font and Lift effect -->
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="font-mono-tag text-xs font-semibold bg-[#FFE853] text-charcoal border border-charcoal">
+Academic Workspace
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-[#8CD85E] text-charcoal border border-charcoal">
+Grounded AI
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-white text-charcoal border border-charcoal">
+PostgreSQL
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-white text-charcoal border border-charcoal">
+Full Stack AI
+</span>
+</div>
+</div>
+<!-- Right Preview Image / Architecture Diagram Link -->
+<div class="md:col-span-5 overflow-hidden rounded-xl border border-charcoal/30 h-56 md:h-64 bg-slate-900 shadow-inner flex items-center justify-center group relative"><a class="w-full h-full block overflow-hidden relative bg-[#121316]" href="https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE" rel="noopener noreferrer" target="_blank"><img alt="SAGE Architecture Diagram" class="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-105 p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKnfTvtBqZy0zT1DXAFHgdQe9YXGhhxslcJ6f4LdayjSKpYHZTkuflJSK63LvtCQA2IUW8fUl8FpqONkWpzxT2-ckqFw-mAZG7vDBAqmqf47Y6BY56vpaXc2683Xr7j5PyqUhtiGWWHjmRHklN6eNyqydUFo_L8LalBTFBy2_tbGO_t_NFPQpNrAmYJl4Vji7VcermKR8Xd_OU38mE4EzDZ172q6WiDf7QJ6zWiJPe"><div class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-800 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Architecture Diagram ↗</div></a></div>
+</div>
+</article>
+<!-- Project 2: Multi-Agent AI Document System -->
+<article class="project-card bg-white rounded-2xl p-7 md:p-8 card-border" style="box-shadow: rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(234, 83, 61, 0.12) 0px 6px 20px -4px;">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Left Info -->
+<div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+<div>
+<h3 class="text-2xl md:text-3xl font-bold text-charcoal tracking-tight mb-3"><a class="hover:text-coral transition-colors inline-flex items-center gap-2 group/link cursor-pointer" href="https://github.com/PokuriLahari/Multi-Agent-AI-Document-System" rel="noopener noreferrer" target="_blank">Multi-Agent AI Document System <svg class="w-5 h-5 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a></h3>
+<p class="text-base text-dark80 leading-relaxed font-normal">
+An in-development document intelligence platform with a FastAPI backend, Streamlit frontend, and SQLite foundation. Planned agents handle ingestion, retrieval, and evidence-grounded answers.
+</p>
+</div>
+<!-- Agent Flow Diagram with Hover Micro-Pulse -->
+<div class="p-3 bg-cream-50 rounded-xl border border-charcoal/20">
+<div class="text-[11px] font-bold text-charcoal uppercase tracking-wider mb-2 font-mono flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#8CD85E] animate-ping opacity-75"></span>
+<span class="w-2 h-2 rounded-full bg-[#8CD85E] -ml-3.5"></span> Multi-Agent Pipeline Flow
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center font-semibold text-charcoal">
+Ingest Agent
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+Vector Index
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+Context RAG
+</div>
+<div class="flow-node bg-[#FDF06F] p-2 rounded-md border border-charcoal font-semibold text-charcoal flex items-center justify-center text-center shadow-xs">
+Verified Answer
+</div>
+</div>
+</div>
+<!-- Tags with Fragment Mono font -->
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="font-mono-tag text-xs font-semibold bg-[#FFE853] text-charcoal border border-charcoal">
+FastAPI + Streamlit
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-[#8CD85E] text-charcoal border border-charcoal">
+Multi-Agent AI
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-white text-charcoal border border-charcoal">
+Vector Store
+</span>
+</div>
+</div>
+<!-- Right Preview Image / Architecture Diagram Link -->
+<div class="md:col-span-5 overflow-hidden rounded-xl border border-charcoal/30 h-56 md:h-64 bg-slate-900 shadow-inner flex items-center justify-center group relative"><a class="w-full h-full block overflow-hidden relative bg-[#121316]" href="https://github.com/PokuriLahari/Multi-Agent-AI-Document-System" rel="noopener noreferrer" target="_blank"><img alt="Multi-Agent AI Document System Architecture Diagram" class="w-full h-full object-contain object-center transition-transform duration-300 group-hover:scale-105 p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD09TXphuACPXLDU8B-OkRWFYKKSlgPn4cE4kwrrais5fPB2r8HpDjaL2rDYTbq2frP5l4_-8-naULToMy4XsQE_YdvzzxMMPM2wI1vH0u39RNgLect8vUCE924QI8i2VqsGMzf2NmWH6gvD6YMslZQ5Z9IZjGTe-Io05ZAtrkEYi6T-aV9MIXD0e3dwRkM3aesfNlCO-sOmHA7HKuc5RcoTlMi639HwxOFeqiDKvm9"><div class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-800 text-[10px] font-mono text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Architecture Diagram ↗</div></a></div>
+</div>
+</article>
+<article class="project-card bg-white rounded-2xl p-7 md:p-8 card-border" style="box-shadow: rgba(0, 0, 0, 0.08) 0px 14px 34px -8px, rgba(234, 83, 61, 0.12) 0px 6px 20px -4px;">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Left Info -->
+<div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+<div>
+<div class="flex items-center justify-between flex-wrap gap-2 mb-2"><div class="flex items-center gap-3"><img alt="AWS Builder Account Avatar" class="w-10 h-10 rounded-xl card-border object-cover bg-charcoal flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7mqZH2o-2WBrw87eaMbsqhJcd-CjVX0SL2ALxj0eyZ6gJL0yndE4GkJqsTc9nN52MyzOVRJT_-vxqhE3bQD3VLVDB5CVc489O12KRj8mg7h5Ucar5LSkpFdlWKKcb-s41Br_h6sDYfGneElPva0IOao7qBMl0J29J1aqQ-UNM6vvprfvNNBkYUk5WuTIRAHDJtcRqp8Tg8mltXterkAcLFVxqEd_Yphg3hDUWY4THfwJkc3kp7aEhWg"><h3 class="text-2xl md:text-3xl font-bold text-charcoal tracking-tight"><a class="hover:text-coral transition-colors inline-flex items-center gap-2 group/link cursor-pointer" href="https://builder.aws.com/content/3LGJ9OADvLus28lQQiWyhVzuz3X/build-a-serverless-daily-quote-emailer-with-aws-lambda-eventbridge-scheduler-and-amazon-ses" rel="noopener noreferrer" target="_blank">AWS Builder Center Articles <svg class="w-5 h-5 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></a></h3></div><a class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold btn-variant-1 cursor-pointer" href="https://builder.aws.com?inviteId=2ef74eb5-e90a-4394-89d7-266295bd1372" rel="noopener noreferrer" target="_blank">Join via Builder Invite ↗</a></div>
+<p class="text-base text-dark80 leading-relaxed font-normal">
+Technical articles and serverless architecture walkthroughs authored as AWS Student Builder Group Leader. Featured article: 'Build a Serverless Daily Quote Emailer with AWS Lambda, EventBridge Scheduler and Amazon SES'.
+</p>
+</div>
+<!-- System Architecture Pipeline / Flow Diagram -->
+<div class="p-3 bg-cream-50 rounded-xl border border-charcoal/20">
+<div class="text-[11px] font-bold text-charcoal uppercase tracking-wider mb-2 font-mono flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-[#EA533D] animate-ping opacity-75"></span>
+<span class="w-2 h-2 rounded-full bg-[#EA533D] -ml-3.5"></span> Articles Workflow</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center font-semibold text-charcoal">
+Drafting &amp; Review
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+Code Architecture
+</div>
+<div class="flow-node bg-white p-2 rounded-md border border-charcoal/30 flex items-center justify-center text-center text-dark80">
+Peer Validation
+</div>
+<div class="flow-node bg-[#FDF06F] p-2 rounded-md border border-charcoal font-semibold text-charcoal flex items-center justify-center text-center shadow-xs">
+Published Guide
+</div>
+</div>
+</div>
+<!-- Tags with Fragment Mono font and Lift effect -->
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="font-mono-tag text-xs font-semibold bg-[#FFE853] text-charcoal border border-charcoal">Serverless</span>
+<span class="font-mono-tag text-xs font-semibold bg-[#8CD85E] text-charcoal border border-charcoal">
+AWS Lambda + SES
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-white text-charcoal border border-charcoal">
+EventBridge
+</span>
+<span class="font-mono-tag text-xs font-semibold bg-white text-charcoal border border-charcoal">
+Community Author
+</span>
+</div>
+</div>
+<!-- Right Preview Image / AWS Builder Center Screenshot -->
+<div class="md:col-span-5 overflow-hidden rounded-xl border border-charcoal/30 h-56 md:h-64 bg-slate-900 shadow-inner flex items-center justify-center group relative"><a class="w-full h-full block overflow-hidden relative bg-cream-50" href="https://builder.aws.com/content/3LGJ9OADvLus28lQQiWyhVzuz3X/build-a-serverless-daily-quote-emailer-with-aws-lambda-eventbridge-scheduler-and-amazon-ses" rel="noopener noreferrer" target="_blank"><div class="w-full h-full bg-[#121316] flex items-center justify-center p-6"><img alt="AWS Builder Center Profile" class="w-40 h-40 md:w-44 md:h-44 object-contain rounded-2xl shadow-md transition-transform duration-300 group-hover:scale-105 border border-charcoal/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByHi9bT5xLXq7pRrE9VYj1FUt3SgziP-2edn_71yqvA6AbtR4tT9EijwH_EQ037zXdNdTOzd5iSeLBAKUTH3muBAn7G30N9BO15uyy5HxpMSdKUU6_biXUY9WW-QRFhRdNzSdKs52vxHZkzr_KTMCn2lYzuqx41AhMFnF8IvU863PzKGeJpgzx5tp-DLYAeD9biG-BEQh2SRlqB1ZJ9h1IWtGUkBA5J7pDMIpcvBUgHyJNxo8Vtxe7-g"></div><div class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-slate-800 text-[10px] font-mono text-amber-300 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Read Article ↗</div></a></div>
+</div>
+</article></div>
+</section>
+<!-- END: FeaturedProjectsSection -->
+<!-- BEGIN: CertificationsSection -->
+<section class="py-12 mb-28 scroll-mt-24 reveal-on-scroll is-visible" data-purpose="certifications-achievements" id="certifications">
+<!-- Section Header -->
+<div class="text-center mb-10">
+<h2 class="text-5xl md:text-6xl font-bold tracking-tight text-charcoal mb-3 italic">
+          Certifications and Achievements
+        </h2>
+<p class="text-dark80 text-base md:text-lg">
+          Building my foundation in cloud computing and artificial intelligence.
+        </p>
+</div>
+<!-- Certifications Banners with Subtle Hover Lift -->
+<div class="max-w-5xl mx-auto space-y-4">
+<!-- AWS Banner (Coral) -->
+<div class="cert-banner bg-coral text-white rounded-xl px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-sm cursor-pointer">
+<span class="font-heading font-bold text-xl md:text-2xl tracking-wide text-white">
+            AWS Certified Cloud Practitioner
+          </span>
+<span class="text-sm md:text-base font-normal text-white/95">
+            Amazon Web Services · Cloud fundamentals
+          </span>
+</div>
+<!-- Azure Banner (White) -->
+<div class="cert-banner bg-white text-charcoal card-border rounded-xl px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-xs cursor-pointer">
+<span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-charcoal">
+            Microsoft Azure AI Fundamentals
+          </span>
+<span class="text-sm md:text-base font-normal text-dark80">
+            AI-900 · Artificial intelligence fundamentals
+          </span>
+</div>
+</div>
+</section>
+<!-- END: CertificationsSection -->
+</main>
+<!-- BEGIN: DecorativeDividers -->
+<!-- Scalloped Multi-Color Tab Wave: Yellow, Sky Blue, Periwinkle Lavender, Coral Orange, Soft Pink, Light Green with Bouncing Physics -->
+<div class="w-full border-t border-charcoal relative select-none" data-purpose="decorative-tab-divider">
+<div class="max-w-5xl mx-auto flex justify-around px-8">
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#FFE853] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Sunny Yellow"></div>
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#6C9EFA] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Sky Blue"></div>
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#B49EFA] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Periwinkle"></div>
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#EA533D] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Warm Coral"></div>
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#F4A7D0] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Soft Pink"></div>
+<div class="scalloped-tab w-12 md:w-14 h-8 bg-[#8CD85E] rounded-b-full -mt-px shadow-xs border-b border-x border-charcoal/20 cursor-pointer" title="Fresh Green"></div>
+</div>
+</div>
+<!-- END: DecorativeDividers -->
+<!-- BEGIN: ContactSection -->
+<footer class="pt-16 pb-14 bg-cream-100 reveal-on-scroll is-visible scroll-mt-24" data-purpose="contact-and-footer" id="contact">
+<div class="max-w-5xl mx-auto px-8">
+<!-- Connect Details & Form -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start mb-20">
+<!-- Left: Text & Contact Info -->
+<div class="md:col-span-7 space-y-4">
+<h3 class="text-xl font-heading font-semibold text-charcoal leading-snug">
+            Let's connect! I'd love to discuss technology, collaborate on projects, and explore learning opportunities.
+          </h3>
+<p class="text-sm md:text-base text-dark80 font-mono">
+<a class="hover:underline hover:text-coral transition-colors cursor-pointer" href="mailto:pokurilahri16@gmail.com">pokurilahri16@gmail.com</a>
+</p>
+<!-- Contact Form with Interactive Inputs & Floating Highlights -->
+<form class="space-y-3.5 pt-2" data-purpose="contact-form" id="contact-form">
+<div>
+<input class="input-interactive w-full rounded-full bg-white px-5 py-3 text-sm card-border outline-none placeholder-gray-400" placeholder="Full Name" required="" type="text">
+</div>
+<div>
+<input class="input-interactive w-full rounded-full bg-white px-5 py-3 text-sm card-border outline-none placeholder-gray-400" placeholder="you@example.com" required="" type="email">
+</div>
+<div>
+<textarea class="input-interactive w-full rounded-2xl bg-white px-5 py-3 text-sm card-border outline-none resize-none placeholder-gray-400" placeholder="Let's talk about a project, collaboration, or opportunity..." required="" rows="4"></textarea>
+</div>
+<div>
+<button class="w-full py-3 rounded-full btn-variant-1 text-sm font-semibold cursor-pointer" type="submit">
+                Send
+              </button>
+</div>
+</form>
+</div>
+<!-- Right: Links & Navigation -->
+<div class="md:col-span-5 md:pl-8 space-y-8">
+<div>
+<h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3 font-mono">Navigation</h4>
+<ul class="space-y-2 text-sm text-dark80 font-medium">
+<li class=""><a class="footer-nav-link hover:text-coral transition-colors hover:underline inline-block transform duration-200 cursor-pointer" data-nav="about" href="#about">About</a></li>
+<li class=""><a class="footer-nav-link hover:text-coral transition-colors hover:underline inline-block transform duration-200 cursor-pointer" data-nav="projects" href="#projects">Projects</a></li>
+<li class=""><a class="footer-nav-link hover:text-coral transition-colors hover:underline inline-block transform duration-200 cursor-pointer" data-nav="certifications" href="#certifications">Certifications</a></li>
+</ul>
+</div>
+<!-- Social Icons with Magnetic Scale -->
+<div>
+<h4 class="text-xs font-bold text-charcoal uppercase tracking-wider mb-3 font-mono">Connect</h4>
+<div class="flex items-center space-x-3 text-charcoal">
+<!-- Instagram -->
+<a aria-label="Instagram" class="social-btn w-8 h-8 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white" href="https://www.instagram.com" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.13-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<!-- X (Twitter) -->
+<a aria-label="X" class="social-btn w-8 h-8 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white" href="https://x.com" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- LinkedIn -->
+<a aria-label="LinkedIn" class="social-btn w-8 h-8 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white" href="https://www.linkedin.com/in/pokuri-lahari/" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<!-- GitHub -->
+<a aria-label="GitHub" class="social-btn w-8 h-8 rounded-full border border-charcoal flex items-center justify-center hover:bg-charcoal hover:text-white" href="https://github.com/PokuriLahari" rel="noopener noreferrer" target="_blank">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Giant Bottom Brand Wordmark -->
+<div class="text-center pt-8 border-t border-black/10">
+<h2 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tight text-charcoal italic select-none">
+          Pokuri Lahari
+        </h2>
+<p class="text-xs md:text-sm text-gray-500 mt-4 font-mono">
+          © 2025 Pokuri Lahari. All rights reserved.
+        </p>
+</div>
+</div>
+</footer>
+<!-- END: ContactSection -->
+<!-- Native JS for Smooth Scrolling, Anchor Handling, Contact Form, Scroll Reveal, Header Blur Elevation & Scrollspy Active Highlighting -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const trackedSectionIds = ['about', 'projects', 'certifications', 'contact'];
+    const navLinks = document.querySelectorAll('header nav a[data-nav], footer ul a[data-nav]');
+    const navContactBtn = document.getElementById('nav-contact-btn');
+
+    // Function to set active navigation state
+    function setActiveNav(sectionId) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-nav') === sectionId) {
+          link.classList.add('active-nav-link');
+        } else {
+          link.classList.remove('active-nav-link');
+        }
+      });
+
+      // Special highlight on Contact Me CTA button in header
+      if (navContactBtn) {
+        if (sectionId === 'contact') {
+          navContactBtn.classList.add('nav-btn-active');
+        } else {
+          navContactBtn.classList.remove('nav-btn-active');
+        }
+      }
+    }
+
+    // Scrollspy calculation function
+    function updateScrollspy() {
+      const scrollPosition = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+
+      // Bottom edge detection for footer / contact section
+      if (scrollPosition + windowHeight >= docHeight - 120) {
+        setActiveNav('contact');
+        return;
+      }
+
+      let currentSectionId = '';
+      const offsetThreshold = 180; // Offset threshold in px from header
+
+      for (const id of trackedSectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= offsetThreshold && rect.bottom > 60) {
+            currentSectionId = id;
+          }
+        }
+      }
+
+      setActiveNav(currentSectionId);
+    }
+
+    // 1. Smooth scroll to anchor targets for all a[href^="#"] links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const targetId = anchor.getAttribute('href');
+        if (targetId && targetId !== '#') {
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            const sectionName = targetId.replace('#', '');
+            setActiveNav(sectionName);
+            targetEl.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // Update URL hash without instant jump
+            if (history.pushState) {
+              history.pushState(null, '', targetId);
+            }
+          }
+        }
+      });
+    });
+
+    // Special handler for "Contact Me" button in header: smooth scroll and focus the first input
+    if (navContactBtn) {
+      navContactBtn.addEventListener('click', () => {
+        setActiveNav('contact');
+        setTimeout(() => {
+          const firstInput = document.querySelector('#contact form input');
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }, 600);
+      });
+    }
+
+    // 2. Contact Form submission handler with visual state transitions
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        if (!submitBtn) return;
+        const originalText = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending...';
+
+        setTimeout(() => {
+          submitBtn.innerHTML = 'Message Sent! ✓';
+          submitBtn.classList.remove('bg-coral');
+          submitBtn.classList.add('bg-emerald-500');
+
+          setTimeout(() => {
+            contactForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.classList.remove('bg-emerald-500');
+            submitBtn.classList.add('bg-coral');
+            submitBtn.disabled = false;
+          }, 3000);
+        }, 700);
+      });
+    }
+
+    // 3. Scroll-triggered reveal animations via IntersectionObserver
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+
+    // 4. Smooth Sticky Header Blur Elevation & Scrollspy Listener on scroll
+    const header = document.getElementById('main-header');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 20) {
+            header.classList.add('shadow-sm', 'bg-cream-100/98');
+            header.classList.remove('bg-cream-100/90');
+          } else {
+            header.classList.remove('shadow-sm', 'bg-cream-100/98');
+            header.classList.add('bg-cream-100/90');
+          }
+          updateScrollspy();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial run to calculate on page load
+    updateScrollspy();
+  });
+</script>
+
+
+
+
+
+
+
+
+</body></html>

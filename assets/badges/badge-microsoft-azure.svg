@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <!-- Filter for subtle depth -->
+    <filter id="badgeShadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+    
+    <!-- Linear gradient for Azure Blue lower shield -->
+    <linearGradient id="azureShieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0078D4" />
+      <stop offset="100%" stop-color="#005A9E" />
+    </linearGradient>
+
+    <!-- Linear gradient for banner -->
+    <linearGradient id="bannerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#badgeShadow)">
+    <!-- Base Shield Outer Border (Navy Charcoal #1E293B) -->
+    <!-- Top arc: from (80,60) to (320,60) with apex at (200, 40) -->
+    <!-- Sides: vertical to y=270, then curves down to bottom point (200, 440) -->
+    <path d="M 80,68 
+             Q 200,32 320,68 
+             L 326,270 
+             C 326,345 270,405 200,442 
+             C 130,405 74,345 74,270 
+             Z" 
+          fill="#0F172A" />
+
+    <!-- Shield Inner Body -->
+    <path d="M 86,76 
+             Q 200,42 314,76 
+             L 320,268 
+             C 320,338 266,396 200,432 
+             C 134,396 80,338 80,268 
+             Z" 
+          fill="#FFFFFF" />
+
+    <!-- Top Half White Container -->
+    <!-- Text: Microsoft -->
+    <text x="200" y="112" 
+          fill="#0F172A" 
+          font-family="'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif" 
+          font-size="29" 
+          font-weight="700" 
+          letter-spacing="-0.2" 
+          text-anchor="middle">
+      Microsoft
+    </text>
+
+    <!-- Text: CERTIFIED -->
+    <text x="200" y="142" 
+          fill="#1E293B" 
+          font-family="'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif" 
+          font-size="19" 
+          font-weight="700" 
+          letter-spacing="4.5" 
+          text-anchor="middle">
+      CERTIFIED
+    </text>
+
+    <!-- Lower Half Azure Blue Shield -->
+    <path d="M 81,215 
+             L 319,215 
+             L 319,268 
+             C 319,338 266,396 200,432 
+             C 134,396 81,338 81,268 
+             Z" 
+          fill="url(#azureShieldGrad)" />
+
+    <!-- White 5-Point Star in Blue Lower Shield -->
+    <polygon points="200,322 208,348 235,348 213,365 221,391 200,375 179,391 187,365 165,348 192,348" 
+             fill="#FFFFFF" />
+
+    <!-- Arched Horizontal Banner: "FUNDAMENTALS" -->
+    <!-- Banner Shadow & Shape -->
+    <path d="M 44,204 
+             Q 200,166 356,204 
+             L 348,266 
+             Q 200,230 52,266 
+             Z" 
+          fill="#0F172A" />
+    
+    <path d="M 48,208 
+             Q 200,172 352,208 
+             L 345,261 
+             Q 200,227 55,261 
+             Z" 
+          fill="url(#bannerGrad)" />
+
+    <!-- "FUNDAMENTALS" Text following the subtle arch -->
+    <text x="200" y="235" 
+          fill="#0F172A" 
+          font-family="'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif" 
+          font-size="25" 
+          font-weight="900" 
+          letter-spacing="2.2" 
+          text-anchor="middle">
+      FUNDAMENTALS
+    </text>
+  </g>
+</svg>

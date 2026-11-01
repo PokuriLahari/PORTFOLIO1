@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+  <defs>
+    <!-- Background Radial Gradient -->
+    <radialGradient id="gcaBg" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1E2638" />
+      <stop offset="60%" stop-color="#111622" />
+      <stop offset="100%" stop-color="#0A0D14" />
+    </radialGradient>
+    
+    <!-- Neon Outer Glow -->
+    <linearGradient id="gcaRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="50%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Gold Arcade Text Gradient -->
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3B0" />
+      <stop offset="35%" stop-color="#FCD34D" />
+      <stop offset="70%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Metallic Bevel -->
+    <linearGradient id="metalBevel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4B5563" />
+      <stop offset="50%" stop-color="#1F2937" />
+      <stop offset="100%" stop-color="#374151" />
+    </linearGradient>
+
+    <!-- Gloss Highlight -->
+    <linearGradient id="gloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Ring Shadow / Base -->
+  <circle cx="100" cy="100" r="95" fill="url(#metalBevel)" />
+  <circle cx="100" cy="100" r="91" fill="none" stroke="url(#gcaRing)" stroke-width="4.5" />
+  
+  <!-- Outer Dotted Tech Track -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#10B981" stroke-width="1" stroke-dasharray="2, 4" opacity="0.6" />
+  
+  <!-- Main Badge Body -->
+  <circle cx="100" cy="100" r="83" fill="url(#gcaBg)" />
+
+  <!-- Background Cyber Circuit Grid Lines -->
+  <path d="M40 70 L60 70 L75 85 L125 85 L140 70 L160 70" fill="none" stroke="#06B6D4" stroke-width="0.8" opacity="0.25" />
+  <path d="M45 130 L65 130 L80 115 L120 115 L135 130 L155 130" fill="none" stroke="#10B981" stroke-width="0.8" opacity="0.25" />
+
+  <!-- Google Cloud 4-Color Cloud Mini Icon -->
+  <g transform="translate(100, 36) scale(0.68)">
+    <g transform="translate(-24, -14)">
+      <!-- Google Cloud Logo Path -->
+      <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="#4285F4" opacity="0.15" />
+      <!-- Cloud Outline in Google Colors -->
+      <path d="M7 16 C5 16 3.5 14.5 3.5 12.5 C3.5 10.7 4.8 9.2 6.5 9 C7.2 6.8 9.3 5.2 11.8 5.2 C14.1 5.2 16.1 6.6 16.9 8.6 C17.4 8.4 17.9 8.3 18.5 8.3 C20.4 8.3 22 9.9 22 11.8 C22 13.8 20.4 15.4 18.5 15.4" fill="none" stroke="#4285F4" stroke-width="2.2" stroke-linecap="round" />
+      <circle cx="6" cy="12" r="1.5" fill="#34A853" />
+      <circle cx="11.5" cy="5.5" r="1.5" fill="#EA4335" />
+      <circle cx="18.5" cy="8.5" r="1.5" fill="#FBBC05" />
+    </g>
+  </g>
+
+  <!-- "Google Cloud" Text -->
+  <text x="100" y="55" fill="#E2E8F0" font-family="'Inter', system-ui, sans-serif" font-size="9" font-weight="600" letter-spacing="1.2" text-anchor="middle">
+    Google Cloud
+  </text>
+
+  <!-- Big 3D "ARCADE" Typography -->
+  <g>
+    <!-- Drop Shadow for Text -->
+    <text x="100" y="82" fill="#78350F" font-family="'Bricolage Grotesque', 'Arial Black', sans-serif" font-size="24" font-weight="900" font-style="italic" letter-spacing="2" text-anchor="middle">
+      ARCADE
+    </text>
+    <!-- Front Text with Gold Gradient -->
+    <text x="100" y="80" fill="url(#goldText)" font-family="'Bricolage Grotesque', 'Arial Black', sans-serif" font-size="24" font-weight="900" font-style="italic" letter-spacing="2" text-anchor="middle">
+      ARCADE
+    </text>
+  </g>
+
+  <!-- "GDP ARCADE" Sub-banner -->
+  <g transform="translate(100, 95)">
+    <rect x="-42" y="-9" width="84" height="17" rx="8.5" fill="#10B981" fill-opacity="0.18" stroke="#10B981" stroke-width="1" />
+    <text x="0" y="3.5" fill="#34D399" font-family="'Fragment Mono', monospace" font-size="8.5" font-weight="700" letter-spacing="1.5" text-anchor="middle">
+      GDP ARCADE
+    </text>
+  </g>
+
+  <!-- Center Gaming / Globe Retro Emblem -->
+  <g transform="translate(100, 137)">
+    <!-- Globe Glow Base -->
+    <circle cx="0" cy="0" r="22" fill="#1E293B" stroke="#38BDF8" stroke-width="1.8" />
+    <circle cx="0" cy="0" r="18" fill="#0284C7" />
+    
+    <!-- Wireframe Globe Meridians -->
+    <ellipse cx="0" cy="0" rx="9" ry="18" fill="none" stroke="#BAE6FD" stroke-width="1" opacity="0.8" />
+    <ellipse cx="0" cy="0" rx="18" ry="7" fill="none" stroke="#BAE6FD" stroke-width="1" opacity="0.8" />
+    <line x1="-18" y1="0" x2="18" y2="0" stroke="#BAE6FD" stroke-width="1" opacity="0.8" />
+    <line x1="0" y1="-18" x2="0" y2="18" stroke="#BAE6FD" stroke-width="1" opacity="0.8" />
+
+    <!-- Pixel / Star Accents -->
+    <path d="M-28 -5 L-26 -7 L-28 -9 L-30 -7 Z" fill="#FBBF24" />
+    <path d="M28 -5 L30 -7 L28 -9 L26 -7 Z" fill="#FBBF24" />
+    <circle cx="-27" cy="10" r="1.5" fill="#34D399" />
+    <circle cx="27" cy="10" r="1.5" fill="#34D399" />
+  </g>
+
+  <!-- Glossy Glass Arc Reflection -->
+  <path d="M25 80 A80 80 0 0 1 175 80 A80 40 0 0 0 25 80 Z" fill="url(#gloss)" />
+</svg>

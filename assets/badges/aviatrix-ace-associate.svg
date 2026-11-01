@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+  <defs>
+    <!-- Crisp White & Light Gray Gradient -->
+    <linearGradient id="aceBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="70%" stop-color="#F8FAFC" />
+      <stop offset="100%" stop-color="#EDF2F7" />
+    </linearGradient>
+
+    <!-- Aviatrix Signature Coral-Red -->
+    <linearGradient id="aviatrixRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5A43" />
+      <stop offset="100%" stop-color="#EA533D" />
+    </linearGradient>
+
+    <!-- Banner Ribbon Dark Gradient -->
+    <linearGradient id="aceNavy" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Hexagon Outline Frame -->
+  <polygon points="100,6 186,52 186,148 100,194 14,148 14,52" fill="#F1F5F9" stroke="#0F172A" stroke-width="3" />
+
+  <!-- Inner Badge Hexagon -->
+  <polygon points="100,14 176,55 176,143 100,184 24,143 24,55" fill="url(#aceBg)" stroke="#CBD5E1" stroke-width="1.5" />
+
+  <!-- Aviatrix Chevron Logo Geometry (Red Folded Wings) -->
+  <g transform="translate(100, 36)">
+    <!-- Center Peak Chevron Arrow -->
+    <polygon points="0,-16 -16,0 -8,7 0,0 8,7 16,0" fill="url(#aviatrixRed)" />
+    <!-- Lower Accent Wing -->
+    <polygon points="0,-7 -9,2 -4,6 0,2 4,6 9,2" fill="#C53727" opacity="0.9" />
+  </g>
+
+  <!-- Brand Title: "AVIATRIX" -->
+  <text x="100" y="67" fill="#0F172A" font-family="'Inter', sans-serif" font-size="12" font-weight="900" letter-spacing="2.8" text-anchor="middle">
+    AVIATRIX
+  </text>
+
+  <!-- Giant "ACE" Mark -->
+  <text x="100" y="105" fill="#0F172A" font-family="'Bricolage Grotesque', 'Inter', sans-serif" font-size="34" font-weight="900" letter-spacing="1" text-anchor="middle">
+    ACE
+  </text>
+
+  <!-- Authentic Red Star Accent -->
+  <g transform="translate(100, 122)">
+    <polygon points="0,-8 2.4,-2.5 8,-2.5 3.6,1.5 5.2,7.2 0,3.6 -5.2,7.2 -3.6,1.5 -8,-2.5 -2.4,-2.5" fill="url(#aviatrixRed)" />
+  </g>
+
+  <!-- Lower Dark Banner: "ASSOCIATE" -->
+  <g transform="translate(100, 152)">
+    <!-- Banner Shadow & Shape -->
+    <rect x="-64" y="-12" width="128" height="24" rx="4" fill="url(#aceNavy)" stroke="#0F172A" stroke-width="1.5" />
+    <text x="0" y="4.5" fill="#FFFFFF" font-family="'Fragment Mono', monospace" font-size="10.5" font-weight="800" letter-spacing="2.5" text-anchor="middle">
+      ASSOCIATE
+    </text>
+  </g>
+
+  <!-- Bottom Apex Bevel Trim -->
+  <polygon points="100,184 120,174 80,174" fill="#0F172A" opacity="0.15" />
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+  <defs>
+    <!-- Faceted Hex Background Gradients -->
+    <linearGradient id="awsDarkBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#243042" />
+      <stop offset="40%" stop-color="#1B2533" />
+      <stop offset="100%" stop-color="#111822" />
+    </linearGradient>
+
+    <!-- Metallic Outer Bevel -->
+    <linearGradient id="awsBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748B" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <!-- AWS Signature Orange Smile -->
+    <linearGradient id="awsOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF9900" />
+      <stop offset="100%" stop-color="#FFAC33" />
+    </linearGradient>
+
+    <!-- Foundational Banner Gradient -->
+    <linearGradient id="awsBanner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Hexagon Border -->
+  <polygon points="100,6 186,52 186,148 100,194 14,148 14,52" fill="url(#awsBorder)" stroke="#0F172A" stroke-width="2.5" />
+  
+  <!-- Inner Faceted Hexagon -->
+  <polygon points="100,13 178,55 178,143 100,186 22,143 22,55" fill="url(#awsDarkBg)" />
+
+  <!-- Subtle Inner Border Highlight -->
+  <polygon points="100,18 172,58 172,139 100,180 28,139 28,58" fill="none" stroke="#475569" stroke-width="1" opacity="0.45" />
+
+  <!-- Top Apex Highlight Accent -->
+  <polygon points="100,14 175,56 170,59 100,21 30,59 25,56" fill="#FFFFFF" opacity="0.12" />
+
+  <!-- AWS Wordmark & Smile Arrow -->
+  <g transform="translate(100, 38)">
+    <text x="0" y="7" fill="url(#awsOrange)" font-family="'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="900" letter-spacing="-0.5" text-anchor="middle">
+      aws
+    </text>
+    <!-- AWS Curved Smile / Arrow -->
+    <path d="M-19 12 Q0 22 19 12" fill="none" stroke="url(#awsOrange)" stroke-width="2.6" stroke-linecap="round" />
+    <path d="M16 11.5 L20 12 L18.5 15.5 Z" fill="url(#awsOrange)" />
+  </g>
+
+  <!-- "certified" Subtext -->
+  <text x="100" y="69" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="11" font-weight="500" letter-spacing="1.5" text-anchor="middle">
+    certified
+  </text>
+
+  <!-- "Cloud Practitioner" Core Titles -->
+  <text x="100" y="96" fill="#FFFFFF" font-family="'Bricolage Grotesque', 'Inter', sans-serif" font-size="20" font-weight="800" letter-spacing="0.2" text-anchor="middle">
+    Cloud
+  </text>
+  <text x="100" y="117" fill="#FFFFFF" font-family="'Bricolage Grotesque', 'Inter', sans-serif" font-size="17" font-weight="800" letter-spacing="0.2" text-anchor="middle">
+    Practitioner
+  </text>
+
+  <!-- Lower Foundational Banner Container -->
+  <g transform="translate(100, 142)">
+    <rect x="-62" y="-12" width="124" height="24" rx="4" fill="url(#awsBanner)" stroke="#334155" stroke-width="1.2" />
+    <text x="0" y="4.5" fill="#E2E8F0" font-family="'Fragment Mono', monospace" font-size="9" font-weight="700" letter-spacing="2.2" text-anchor="middle">
+      FOUNDATIONAL
+    </text>
+  </g>
+
+  <!-- Orange Bottom Apex Chevron Wings -->
+  <polygon points="100,185 174,144 174,151 100,192 26,151 26,144" fill="url(#awsOrange)" />
+  <polygon points="100,178 164,142 164,147 100,183 36,147 36,142" fill="#E67E00" opacity="0.6" />
+</svg>
