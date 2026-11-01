@@ -374,14 +374,10 @@ export default function App() {
 
               <p className="text-lg md:text-xl text-[#333333] leading-relaxed font-normal">
                 I'm Pokuri Lahari, pursuing Computer Science and Engineering at KLH University (2024–2028) and serving as an{' '}
-                <span className="underline decoration-[#EA533D] decoration-2 underline-offset-4 font-semibold text-[#111111]">
-                  AWS Student Builder Group Leader (2024–2027)
+                <span className="aws-leader-highlight">
+                  AWS Student Builder Group Leader (2026–2027)
                 </span>
                 . I'm interested in programming, problem-solving, and exploring how software can turn ideas into useful solutions. Here, I share my projects and learning journey.
-              </p>
-
-              <p className="text-base text-[#444444] leading-relaxed font-normal">
-                Leading student cloud initiatives, authoring technical walkthroughs on the official AWS Builder Center, and fostering hands-on serverless, multi-agent AI, and cloud architectures.
               </p>
             </div>
 
@@ -823,7 +819,7 @@ export default function App() {
                       </h3>
                     </div>
                     <p className="text-base text-[#333333] leading-relaxed font-normal">
-                      Technical articles and serverless architecture walkthroughs authored as AWS Student Builder Group Leader, including "Build a Serverless Daily Quote Emailer with AWS Lambda, EventBridge Scheduler, and Amazon SES."
+                      Technical articles and serverless architecture walkthroughs, including "Build a Serverless Daily Quote Emailer with AWS Lambda, EventBridge Scheduler, and Amazon SES."
                     </p>
                   </div>
 
@@ -839,7 +835,7 @@ export default function App() {
                       EventBridge
                     </span>
                     <span className="font-mono-tag text-xs font-semibold bg-[#EA533D] text-white border border-black">
-                      AWS Student Builder Group Leader
+                      AWS Builder Center
                     </span>
                   </div>
 
@@ -875,27 +871,6 @@ export default function App() {
                     >
                       Join via Builder Invite ↗
                     </a>
-
-                    {/* Show More / Show Less Toggle Button */}
-                    <button
-                      type="button"
-                      onClick={() => handleToggleProject('aws-builder')}
-                      aria-expanded={isProjectExpanded(expandedProjects, 'aws-builder')}
-                      aria-controls="project-details-aws-builder"
-                      className="btn-toggle-expand"
-                    >
-                      <span>{isProjectExpanded(expandedProjects, 'aws-builder') ? 'Show Less' : 'Show More'}</span>
-                      <svg
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          isProjectExpanded(expandedProjects, 'aws-builder') ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
                   </div>
                 </div>
 
@@ -915,61 +890,6 @@ export default function App() {
                   </a>
                 </div>
               </div>
-
-              {/* Expandable Tech Stack & Duration Drawer */}
-              <AnimatePresence>
-                {isProjectExpanded(expandedProjects, 'aws-builder') && (
-                  <motion.div
-                    id="project-details-aws-builder"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.35, ease: 'easeOut' }}
-                    className="overflow-hidden w-full mt-6 pt-5 border-t border-black/10 dark:border-violet-500/20"
-                  >
-                    <div className="project-details-panel p-5 md:p-6 rounded-xl space-y-4">
-                      {/* Project Duration */}
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-black/10 dark:border-violet-500/20">
-                        <div className="project-section-title">
-                          <svg className="w-4 h-4 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <span>Project Duration</span>
-                        </div>
-                        <div className="project-duration-badge">
-                          {getProjectDuration('aws-builder')}
-                        </div>
-                      </div>
-
-                      {/* Tech Stack List */}
-                      <div>
-                        <div className="project-section-title mb-3">
-                          <svg className="w-4 h-4 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                          </svg>
-                          <span>Tech Stack Breakdown</span>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {[
-                            'AWS Lambda (Serverless Compute)',
-                            'Amazon EventBridge Scheduler',
-                            'Amazon Simple Email Service (SES)',
-                            'AWS IAM Least-Privilege Policies',
-                            'Amazon CloudWatch Logs & Metrics',
-                            'Node.js & Python Serverless Functions',
-                            'Architecture Design Flowcharts',
-                            'AWS Builder Center Community Hub'
-                          ].map((tech) => (
-                            <span key={tech} className="tech-stack-pill">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.article>
           </div>
         </section>
@@ -1316,7 +1236,7 @@ export default function App() {
               Pokuri Lahari
             </h2>
             <p className="text-xs md:text-sm text-gray-500 mt-4 font-mono">
-              © {new Date().getFullYear()} Pokuri Lahari · AWS Student Builder Group Leader
+              © {new Date().getFullYear()} Pokuri Lahari
             </p>
           </div>
         </div>

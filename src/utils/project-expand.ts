@@ -62,6 +62,11 @@ export const PROJECT_DETAILS: Record<string, ProjectMetadata> = {
   }
 };
 
+export function isExpandableProject(projectId: string): boolean {
+  // Only SAGE and Multi-Agent AI Document System have expandable details
+  return projectId === 'sage' || projectId === 'multi-agent';
+}
+
 export function getProjectDuration(projectId: string): string {
   return PROJECT_DETAILS[projectId]?.duration || '';
 }
@@ -70,6 +75,10 @@ export function toggleProjectExpansion(
   state: Record<string, boolean>,
   projectId: string
 ): Record<string, boolean> {
+  // Do not allow expanding non-expandable projects
+  if (!isExpandableProject(projectId)) {
+    return state;
+  }
   return {
     ...state,
     [projectId]: !state[projectId]
@@ -80,5 +89,8 @@ export function isProjectExpanded(
   state: Record<string, boolean>,
   projectId: string
 ): boolean {
+  if (!isExpandableProject(projectId)) {
+    return false;
+  }
   return Boolean(state[projectId]);
 }

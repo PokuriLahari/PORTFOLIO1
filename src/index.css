@@ -318,6 +318,20 @@ html.dark .theme-heading {
   color: #F5F3FF !important;
 }
 
+.aws-leader-highlight {
+  font-weight: 600;
+  color: #111111;
+  text-decoration: underline;
+  text-decoration-color: #EA533D;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+html.dark .aws-leader-highlight {
+  color: #FFFFFF !important;
+  text-decoration-color: #EA533D !important;
+}
+
 html.dark p,
 html.dark .theme-text-muted {
   color: #C4B5FD !important;

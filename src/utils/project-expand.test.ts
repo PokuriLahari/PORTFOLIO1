@@ -3,11 +3,18 @@ import assert from 'node:assert/strict';
 import {
   toggleProjectExpansion,
   isProjectExpanded,
+  isExpandableProject,
   getProjectDuration,
   PROJECT_DETAILS
 } from './project-expand.js';
 
 describe('project-expand logic unit tests', () => {
+  it('identifies expandable vs non-expandable projects', () => {
+    assert.equal(isExpandableProject('sage'), true);
+    assert.equal(isExpandableProject('multi-agent'), true);
+    assert.equal(isExpandableProject('aws-builder'), false);
+  });
+
   it('defaults to not expanded when projectId is not in state', () => {
     const state = {};
     assert.equal(isProjectExpanded(state, 'sage'), false);
@@ -20,6 +27,12 @@ describe('project-expand logic unit tests', () => {
     const updated = toggleProjectExpansion(initialState, 'sage');
     assert.equal(isProjectExpanded(updated, 'sage'), true);
     assert.equal(isProjectExpanded(updated, 'multi-agent'), false);
+  });
+
+  it('prevents expanding aws-builder as requested', () => {
+    const initialState = {};
+    const updated = toggleProjectExpansion(initialState, 'aws-builder');
+    assert.equal(isProjectExpanded(updated, 'aws-builder'), false);
   });
 
   it('toggles an already expanded project back to collapsed', () => {
