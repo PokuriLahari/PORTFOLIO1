@@ -19,13 +19,6 @@ const BADGES = [
     file: '/assets/badges/badge-aws.png'
   },
   {
-    id: 'aviatrix-ace',
-    title: 'Aviatrix ACE Associate',
-    subtitle: 'Multi-Cloud Networking',
-    issuer: 'Aviatrix Systems',
-    file: '/assets/badges/badge-aviatrix.png'
-  },
-  {
     id: 'azure-ai',
     title: 'Microsoft Azure AI Fundamentals',
     subtitle: 'AI-900 Credential',
@@ -478,20 +471,20 @@ export default function App() {
                     <button
                       onClick={() =>
                         setActiveModalDiagram({
-                          title: 'SAGE — System Architecture',
-                          src: '/assets/images/sage-architecture-diagram.svg',
+                          title: 'SAGE — Student Workspace UI Preview',
+                          src: '/assets/images/sage-preview.png',
                           description:
-                            'High-contrast layered system architecture in violet & lavender: FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
-                          tags: ['FastAPI Gateway', 'JWT Guard', 'PostgreSQL', 'Context RAG Engine'],
+                            'Student academic guidance workspace: clear task management, schedule unification, contest tracking, and AI focus recommendations.',
+                          tags: ['Academic Workspace', 'FastAPI', 'Context RAG', 'PostgreSQL'],
                           githubUrl: 'https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE'
                         })
                       }
-                      className="px-4 py-2 rounded-full border border-[#8B5CF6]/50 hover:border-[#8B5CF6] text-xs font-semibold text-[#6D28D9] hover:bg-[#8B5CF6]/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-full border border-black/20 hover:border-[#EA533D] text-xs font-semibold text-[#111111] hover:text-[#EA533D] hover:bg-[#FAF8F0] transition-colors cursor-pointer inline-flex items-center gap-1.5"
                     >
-                      <svg className="w-3.5 h-3.5 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
-                      Inspect Architecture ↗
+                      Preview Interface ↗
                     </button>
 
                     {/* Show More / Show Less Toggle Button */}
@@ -517,26 +510,26 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right Architecture Diagram (Violet / Lavender Cyber-Retro Frame) */}
+                {/* Right UI Preview Frame */}
                 <div
-                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-[#8B5CF6]/50 bg-[#0B0817] shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#A78BFA] transition-all"
+                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-black/15 bg-white shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#EA533D] transition-all"
                   onClick={() =>
                     setActiveModalDiagram({
-                      title: 'SAGE — System Architecture',
-                      src: '/assets/images/sage-architecture-diagram.svg',
+                      title: 'SAGE — Student Workspace UI Preview',
+                      src: '/assets/images/sage-preview.png',
                       description:
-                        'High-contrast layered system architecture in violet & lavender: FastAPI routing, JWT security, RAG retrieval engine, PostgreSQL persistence, and student guidance generation.',
-                      tags: ['FastAPI Gateway', 'JWT Guard', 'PostgreSQL', 'Context RAG Engine'],
+                        'Student academic guidance workspace: clear task management, schedule unification, contest tracking, and AI focus recommendations.',
+                      tags: ['Academic Workspace', 'FastAPI', 'Context RAG', 'PostgreSQL'],
                       githubUrl: 'https://github.com/PokuriLahari/KLH-CSE-2026-team22-SAGE'
                     })
                   }
                 >
                   <img
-                    alt="SAGE System Architecture Diagram"
-                    className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                    src="/assets/images/sage-architecture-diagram.svg"
+                    alt="SAGE Student Workspace Interface Preview"
+                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    src="/assets/images/sage-preview.png"
                   />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#DDD6FE] font-mono border border-[#8B5CF6]/50 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/80 text-[10px] text-white font-mono border border-white/20 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
                     <span>🔍 Click to expand</span>
                   </div>
                 </div>
@@ -599,7 +592,7 @@ export default function App() {
               </AnimatePresence>
             </motion.article>
 
-            {/* Project 2: Multi-Agent AI Document System */}
+            {/* Project 2: WatchDog — Intelligent Website Change Detection */}
             <motion.article
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -616,41 +609,41 @@ export default function App() {
                     <h3 className="text-2xl md:text-3xl font-bold text-[#111111] tracking-tight mb-3">
                       <a
                         className="hover:text-[#EA533D] transition-colors inline-flex items-center gap-2 group/link cursor-pointer"
-                        href="https://github.com/PokuriLahari/Multi-Agent-AI-Document-System"
+                        href="https://github.com/PokuriLahari/intelligent-website-change-detection"
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        Multi-Agent AI Document System
+                        WatchDog — Intelligent Website Change Detection
                         <svg className="w-5 h-5 opacity-70 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                         </svg>
                       </a>
                     </h3>
                     <p className="text-base text-[#333333] leading-relaxed font-normal">
-                      An in-development document intelligence platform with a FastAPI backend, Streamlit frontend, and SQLite foundation. Planned agents handle ingestion, retrieval, and evidence-grounded answers.
+                      An automated web monitoring platform that actively tracks target websites (including pricing and documentation pages), detects DOM and visual changes on configurable intervals, and surfaces major alerts.
                     </p>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     <span className="font-mono-tag text-xs font-semibold bg-[#FAF8F0] text-[#111111] border border-black">
-                      FastAPI + Streamlit
+                      Website Monitoring
                     </span>
                     <span className="font-mono-tag text-xs font-semibold bg-[#8B5CF6]/15 text-[#6D28D9] border border-[#8B5CF6]/50">
-                      Multi-Agent AI
+                      DOM &amp; Visual Diff
                     </span>
                     <span className="font-mono-tag text-xs font-semibold bg-white text-[#111111] border border-black">
-                      Vector Store
+                      Interval Scheduler
                     </span>
-                    <span className="font-mono-tag text-xs font-semibold bg-[#7C3AED] text-white border border-black">
-                      Autonomous Pipeline
+                    <span className="font-mono-tag text-xs font-semibold bg-[#EA533D] text-white border border-black">
+                      Automated Alerts
                     </span>
                   </div>
 
-                  {/* Action Buttons: GitHub Button & Full Architecture Inspector */}
+                  {/* Action Buttons: GitHub Button, Preview Dashboard, & Show More */}
                   <div className="pt-2 flex items-center gap-3 flex-wrap">
                     <a
-                      href="https://github.com/PokuriLahari/Multi-Agent-AI-Document-System"
+                      href="https://github.com/PokuriLahari/intelligent-website-change-detection"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-5 py-2.5 rounded-full btn-variant-1 font-semibold text-sm cursor-pointer inline-flex items-center gap-2 shadow-xs"
@@ -664,34 +657,34 @@ export default function App() {
                     <button
                       onClick={() =>
                         setActiveModalDiagram({
-                          title: 'Multi-Agent AI Document System Architecture',
-                          src: '/assets/images/multi-agent-architecture-diagram.svg',
+                          title: 'WatchDog — Intelligent Website Change Detection',
+                          src: '/assets/images/watchdog-preview.png',
                           description:
-                            'High-contrast autonomous multi-agent pipeline in violet & lavender: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
-                          tags: ['Ingestion Agent', 'Vector Memory Lake', 'Evidence Synthesizer', 'FastAPI'],
-                          githubUrl: 'https://github.com/PokuriLahari/Multi-Agent-AI-Document-System'
+                            'Real-time change detection dashboard: monitored sites, check frequency intervals, visual diff events, and major alerts tracking.',
+                          tags: ['Change Detection', 'DOM Diff', 'Alert Dispatcher', 'FastAPI'],
+                          githubUrl: 'https://github.com/PokuriLahari/intelligent-website-change-detection'
                         })
                       }
-                      className="px-4 py-2 rounded-full border border-[#8B5CF6]/50 hover:border-[#8B5CF6] text-xs font-semibold text-[#6D28D9] hover:bg-[#8B5CF6]/10 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-full border border-black/20 hover:border-[#EA533D] text-xs font-semibold text-[#111111] hover:text-[#EA533D] hover:bg-[#FAF8F0] transition-colors cursor-pointer inline-flex items-center gap-1.5"
                     >
-                      <svg className="w-3.5 h-3.5 text-[#8B5CF6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 text-[#EA533D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
-                      Inspect Architecture ↗
+                      Preview Dashboard ↗
                     </button>
 
                     {/* Show More / Show Less Toggle Button */}
                     <button
                       type="button"
-                      onClick={() => handleToggleProject('multi-agent')}
-                      aria-expanded={isProjectExpanded(expandedProjects, 'multi-agent')}
-                      aria-controls="project-details-multi-agent"
+                      onClick={() => handleToggleProject('watchdog')}
+                      aria-expanded={isProjectExpanded(expandedProjects, 'watchdog')}
+                      aria-controls="project-details-watchdog"
                       className="btn-toggle-expand"
                     >
-                      <span>{isProjectExpanded(expandedProjects, 'multi-agent') ? 'Show Less' : 'Show More'}</span>
+                      <span>{isProjectExpanded(expandedProjects, 'watchdog') ? 'Show Less' : 'Show More'}</span>
                       <svg
                         className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          isProjectExpanded(expandedProjects, 'multi-agent') ? 'rotate-180' : ''
+                          isProjectExpanded(expandedProjects, 'watchdog') ? 'rotate-180' : ''
                         }`}
                         fill="none"
                         stroke="currentColor"
@@ -703,26 +696,26 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Right Architecture Diagram (Violet / Lavender Cyber-Retro Frame) */}
+                {/* Right UI Preview Frame */}
                 <div
-                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-[#8B5CF6]/50 bg-[#0B0817] shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#A78BFA] transition-all"
+                  className="md:col-span-6 overflow-hidden rounded-xl border-2 border-black/15 bg-white shadow-md flex items-center justify-center group relative cursor-pointer hover:border-[#EA533D] transition-all"
                   onClick={() =>
                     setActiveModalDiagram({
-                      title: 'Multi-Agent AI Document System Architecture',
-                      src: '/assets/images/multi-agent-architecture-diagram.svg',
+                      title: 'WatchDog — Intelligent Website Change Detection',
+                      src: '/assets/images/watchdog-preview.png',
                       description:
-                        'High-contrast autonomous multi-agent pipeline in violet & lavender: Ingestion Agent parses documents, RAG Retrieval Agent queries the Vector Memory Lake, and Evidence Synthesizer validates answers without hallucinations.',
-                      tags: ['Ingestion Agent', 'Vector Memory Lake', 'Evidence Synthesizer', 'FastAPI'],
-                      githubUrl: 'https://github.com/PokuriLahari/Multi-Agent-AI-Document-System'
+                        'Real-time change detection dashboard: monitored sites, check frequency intervals, visual diff events, and major alerts tracking.',
+                      tags: ['Change Detection', 'DOM Diff', 'Alert Dispatcher', 'FastAPI'],
+                      githubUrl: 'https://github.com/PokuriLahari/intelligent-website-change-detection'
                     })
                   }
                 >
                   <img
-                    alt="Multi-Agent AI Document System Architecture Diagram"
-                    className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                    src="/assets/images/multi-agent-architecture-diagram.svg"
+                    alt="WatchDog Dashboard Preview"
+                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    src="/assets/images/watchdog-preview.png"
                   />
-                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/85 text-[10px] text-[#DDD6FE] font-mono border border-[#8B5CF6]/50 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
+                  <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/80 text-[10px] text-white font-mono border border-white/20 opacity-90 group-hover:opacity-100 flex items-center gap-1 shadow-xs">
                     <span>🔍 Click to expand</span>
                   </div>
                 </div>
@@ -730,9 +723,9 @@ export default function App() {
 
               {/* Expandable Tech Stack & Duration Drawer */}
               <AnimatePresence>
-                {isProjectExpanded(expandedProjects, 'multi-agent') && (
+                {isProjectExpanded(expandedProjects, 'watchdog') && (
                   <motion.div
-                    id="project-details-multi-agent"
+                    id="project-details-watchdog"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
@@ -749,7 +742,7 @@ export default function App() {
                           <span>Project Duration</span>
                         </div>
                         <div className="project-duration-badge">
-                          {getProjectDuration('multi-agent')}
+                          {getProjectDuration('watchdog')}
                         </div>
                       </div>
 
@@ -763,14 +756,14 @@ export default function App() {
                         </div>
                         <div className="flex flex-wrap gap-2">
                           {[
-                            'FastAPI Backend (Async)',
-                            'Streamlit Reactive UI',
-                            'Autonomous Multi-Agent Loop',
-                            'Vector Memory Lake (FAISS / ChromaDB)',
-                            'PyMuPDF & Unstructured PDF Parsing',
-                            'Evidence Synthesizer & Guardrails',
-                            'SQLite Metadata Storage',
-                            'Python AsyncIO Processing'
+                            'Python & FastAPI Backend',
+                            'Headless Crawler & DOM Content Extractor',
+                            'Automated DOM & Visual Diffing Engine',
+                            'Interval Scheduler (30m / 5m Checks)',
+                            'Alert & Notification Dispatcher',
+                            'Event Logging & History Tracking',
+                            'Real-Time Dashboard Analytics (Tailwind CSS)',
+                            'Docker Containerization'
                           ].map((tech) => (
                             <span key={tech} className="tech-stack-pill">
                               {tech}
@@ -984,7 +977,7 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* 3. Aviatrix Certified Engineer (ACE) - Red/Coral banner as shown in reference */}
+            {/* 3. AI for Bharat Hackathon — Alternating Coral/Red banner as shown in reference */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -994,54 +987,18 @@ export default function App() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center flex-shrink-0 border border-white/25">
-                  <img src="/assets/badges/badge-aviatrix.png" alt="Aviatrix ACE Associate Badge" className="w-9 h-9 object-contain" />
-                </div>
-                <div>
-                  <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-white block">
-                    Aviatrix Certified Engineer (ACE)
-                  </span>
-                  <span className="text-sm md:text-base font-normal text-white/95">
-                    ACE Associate · Multi-cloud networking
-                  </span>
-                </div>
-              </div>
-              <div className="flex-shrink-0 sm:pl-4">
-                <a
-                  href="https://www.credly.com/badges/a667b9c4-c324-4aa4-9069-5577f8d28273/public_url"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white text-[#EA533D] hover:bg-[#FAF8F0] transition-all shadow-xs hover:scale-105 active:scale-95"
-                >
-                  <span>Verify Credential</span>
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                  </svg>
-                </a>
-              </div>
-            </motion.div>
-
-            {/* 4. AI for Bharat Hackathon — Pure White banner as shown in reference */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ duration: 0.45, delay: 0.2 }}
-              className="cert-banner cert-banner-light bg-white text-[#111111] rounded-xl px-6 md:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm border border-black/15 card-border"
-            >
-              <div className="flex items-center gap-4">
-                <div className="cert-icon-bg w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center flex-shrink-0 border border-black/10">
                   <img src="/assets/badges/badge-ai-for-bharat.png" alt="AI for Bharat Hackathon Badge" className="w-9 h-9 object-contain" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                    <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-[#111111] cert-title">
+                    <span className="font-heading font-bold text-xl md:text-2xl tracking-wide text-white block">
                       AI for Bharat Hackathon — Top Innovator
                     </span>
-                    <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#EA533D] text-white shadow-2xs">
+                    <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-white text-[#EA533D] shadow-2xs">
                       One of 36 Teams
                     </span>
                   </div>
-                  <span className="text-sm md:text-base font-normal text-[#444444] cert-desc">
+                  <span className="text-sm md:text-base font-normal text-white/95">
                     AWS &amp; Hack2Skill · Top 36 Teams · Prototype Phase
                   </span>
                 </div>
@@ -1051,7 +1008,7 @@ export default function App() {
                   href="https://certificate.hack2skill.com/verify/2026H2S04AIFB-P01365"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-[#EA533D] text-white hover:bg-[#FF5A43] transition-all shadow-xs hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold bg-white text-[#EA533D] hover:bg-[#FAF8F0] transition-all shadow-xs hover:scale-105 active:scale-95"
                 >
                   <span>Verify Certificate</span>
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -26,6 +26,23 @@ export const PROJECT_DETAILS: Record<string, ProjectMetadata> = {
       'Docker Containerization'
     ]
   },
+  watchdog: {
+    id: 'watchdog',
+    name: 'WatchDog — Intelligent Website Change Detection',
+    duration: 'Jun 2026 – Oct 2026 · 5 Months (Web Crawler & Diff Engine)',
+    durationShort: 'Jun 2026 – Oct 2026 (5 mos)',
+    repoUrl: 'https://github.com/PokuriLahari/intelligent-website-change-detection',
+    techStack: [
+      'Python & FastAPI Backend',
+      'Headless Crawler & DOM Content Extractor',
+      'Automated DOM & Visual Diffing Engine',
+      'Interval Scheduler (30m / 5m Checks)',
+      'Alert & Notification Dispatcher',
+      'Event Logging & History Tracking',
+      'Real-Time Dashboard Analytics (Tailwind CSS)',
+      'Docker Containerization'
+    ]
+  },
   'multi-agent': {
     id: 'multi-agent',
     name: 'Multi-Agent AI Document System',
@@ -63,8 +80,8 @@ export const PROJECT_DETAILS: Record<string, ProjectMetadata> = {
 };
 
 export function isExpandableProject(projectId: string): boolean {
-  // Only SAGE and Multi-Agent AI Document System have expandable details
-  return projectId === 'sage' || projectId === 'multi-agent';
+  // SAGE and WatchDog have expandable details
+  return projectId === 'sage' || projectId === 'watchdog' || projectId === 'multi-agent';
 }
 
 export function getProjectDuration(projectId: string): string {
